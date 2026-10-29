@@ -137,8 +137,10 @@ body {
 }
 
 .pool-photo img {
-    width: 100px !important;
-    height: 100px !important;
+    width: 380px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 /* Titolo pagina */
 .page-title {
