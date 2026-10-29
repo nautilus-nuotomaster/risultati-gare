@@ -116,7 +116,11 @@ body {
 
     object-fit: contain;
 }
-
+.logo img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
 /* Titolo */
 .title-container h1 {
 
