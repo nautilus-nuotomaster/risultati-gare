@@ -1,369 +1,365 @@
 /* ================================================================================ */
-/* azzera tutti gli elementi della pagina e tutti mantengono le stesse impostazioni */
+/* AZZERA LE IMPOSTAZIONI PREDEFINITE DEL BROWSER                                   */
 /* ================================================================================ */
 
 * {
 
-    margin: 0;
+    margin: 0;                         /* elimina tutti i margini automatici */
 
-    padding: 0;
+    padding: 0;                        /* elimina tutti i padding automatici */
 
-    box-sizing: border-box;
+    box-sizing: border-box;            /* larghezze e altezze comprendono anche padding e bordi */
 
 }
 
 
-/* ===================================================== */
-/* BODY                                                  */
-/* ===================================================== */
+/* ================================================================================ */
+/* PAGINA PRINCIPALE                                                                 */
+/* ================================================================================ */
 
 body {
 
-    background: #eef3f8;
+    background: #eef3f8;               /* colore di sfondo della pagina */
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif; /* carattere utilizzato */
 
-    padding: 10px;
+    padding: 0.5vw;                    /* piccolo bordo rispetto allo schermo */
 
 }
 
 
-/* ===================================================== */
-/* TESTATA                                               */
-/* ===================================================== */
+/* ================================================================================ */
+/* TESTATA                                                                           */
+/* ================================================================================ */
 
 .header {
 
-    background: linear-gradient(                 /* sfondo sfumato */
-        90deg,                                   /* da sinistra verso destra */
-        #1e4fa8,                                 /* colore iniziale */
-        #4c7ddd                                  /* colore finale */
+    background: linear-gradient(        /* sfondo sfumato */
+        90deg,                          /* direzione da sinistra verso destra */
+        #1e4fa8,                        /* colore iniziale */
+        #4c7ddd                         /* colore finale */
     );
 
-    display: grid;                               /* usa una griglia */
+    display: grid;                      /* utilizza una griglia */
 
-    grid-template-columns: 15% 1fr 15%;          /* logo | titolo | foto */
+    grid-template-columns:              /* definisce le colonne */
+        12%                             /* colonna logo */
+        1fr                             /* colonna titolo */
+        12%;                            /* colonna foto */
 
-    height: 20vh;                                /* altezza della testata = 15% dell'altezza schermo */
+    height: 15vh;                       /* altezza della testata = 15% dell'altezza schermo */
 
-    gap: 1vw;                                    /* spazio tra le 3 colonne */
+    gap: 1vw;                           /* spazio tra logo, titolo e foto */
 
-    align-items: center;                         /* centra verticalmente tutto il contenuto */
+    align-items: center;                /* centra verticalmente gli elementi */
 
-    border-radius: 1vw;                          /* arrotondamento proporzionale */
+    overflow: hidden;                   /* nasconde ciò che esce dalla testata */
 
-    margin-bottom: 1vw;                          /* spazio sotto la testata */
+    border-radius: 1vw;                 /* angoli arrotondati */
 
-    color: white;                                /* colore del testo */
+    margin-bottom: 1vw;                 /* spazio sotto la testata */
 
-    overflow: hidden;                            /* nasconde ciò che esce dalla testata */
+    color: white;                       /* colore del testo */
 
 }
 
 
-
-
-/* ===================================================== */
-/* CONTENITORE LOGO                                      */
-/* ===================================================== */
+/* ================================================================================ */
+/* CONTENITORE LOGO                                                                  */
+/* ================================================================================ */
 
 .logo {
 
-    height: 100%;                                /* alto quanto la testata */
+    height: 100%;                       /* stessa altezza della testata */
 
-    display: flex;                               /* usa flexbox */
+    display: flex;                      /* usa flexbox */
 
-    justify-content: center;                     /* centra orizzontalmente */
+    justify-content: center;            /* centra orizzontalmente */
 
-    align-items: center;                         /* centra verticalmente */
+    align-items: center;                /* centra verticalmente */
 
 }
 
 
-/* ===================================================== */
-/* IMMAGINE LOGO                                         */
-/* ===================================================== */
+/* ================================================================================ */
+/* IMMAGINE LOGO                                                                     */
+/* ================================================================================ */
 
 .logo img {
 
-    max-height: 80%;                             /* massimo 80% dell'altezza del contenitore logo */
+    max-width: 90%;                     /* non supera il 90% della colonna */
 
-    max-width: 100%;                             /* non oltrepassa la larghezza disponibile */
+    max-height: 90%;                    /* non supera il 90% dell'altezza disponibile */
 
-    width: auto;                                 /* calcola automaticamente la larghezza */
+    width: auto;                        /* mantiene le proporzioni */
 
-    height: auto;                                /* mantiene le proporzioni originali */
+    height: auto;                       /* mantiene le proporzioni */
 
 }
 
 
-/* ===================================================== */
-/* TITOLO CENTRALE                                       */
-/* ===================================================== */
+/* ================================================================================ */
+/* CONTENITORE TITOLO                                                                */
+/* ================================================================================ */
 
 .site-title {
 
-    text-align: center;                          /* testo centrato */
+    text-align: center;                 /* testo centrato */
 
 }
 
 
-/* ===================================================== */
-/* TITOLO PRINCIPALE                                     */
-/* ===================================================== */
+/* ================================================================================ */
+/* TITOLO PRINCIPALE                                                                 */
+/* ================================================================================ */
 
 .site-title h1 {
 
-    font-size: 3vh;                              /* dimensione basata sull'altezza dello schermo */
+    font-size: clamp(
+        1.2rem,                         /* dimensione minima */
+        2vw,                            /* dimensione ideale */
+        2.8rem                          /* dimensione massima */
+    );
 
-    margin-bottom: 0.5vh;                        /* piccolo spazio sotto */
+    margin-bottom: 0.5vh;              /* spazio sotto il titolo */
 
 }
 
 
-/* ===================================================== */
-/* SOTTOTITOLO                                           */
-/* ===================================================== */
+/* ================================================================================ */
+/* SOTTOTITOLO                                                                       */
+/* ================================================================================ */
 
 .site-title p {
 
-    font-size: 1.5vh;                            /* metà circa del titolo principale */
+    font-size: clamp(
+        0.8rem,                         /* dimensione minima */
+        1vw,                            /* dimensione ideale */
+        1.3rem                          /* dimensione massima */
+    );
 
 }
 
 
-/* ===================================================== */
-/* CONTENITORE FOTO                                      */
-/* ===================================================== */
+/* ================================================================================ */
+/* CONTENITORE FOTO                                                                  */
+/* ================================================================================ */
 
 .pool-photo {
 
-    height: 100%;                                /* alto quanto la testata */
+    height: 100%;                       /* stessa altezza della testata */
 
-    display: flex;                               /* usa flexbox */
+    display: flex;                      /* usa flexbox */
 
-    justify-content: center;                     /* centra orizzontalmente */
+    justify-content: center;            /* centra orizzontalmente */
 
-    align-items: center;                         /* centra verticalmente */
+    align-items: center;                /* centra verticalmente */
 
 }
 
 
-/* ===================================================== */
-/* FOTO                                                  */
-/* ===================================================== */
+/* ================================================================================ */
+/* FOTO                                                                              */
+/* ================================================================================ */
 
 .pool-photo img {
 
-    max-height: 80%;                             /* massimo 80% dell'altezza del contenitore */
+    max-width: 90%;                     /* non supera il 90% della colonna */
 
-    max-width: 100%;                             /* non supera la larghezza disponibile */
+    max-height: 90%;                    /* non supera il 90% dell'altezza */
 
-    width: auto;                                 /* mantiene le proporzioni */
+    width: auto;                        /* mantiene proporzioni */
 
-    height: auto;                                /* mantiene le proporzioni */
+    height: auto;                       /* mantiene proporzioni */
 
 }
 
 
-/* ===================================================== */
-/* LAYOUT PRINCIPALE                                     */
-/* ===================================================== */
+/* ================================================================================ */
+/* CONTENITORE PRINCIPALE                                                            */
+/* ================================================================================ */
 
 .container {
 
-    display: grid;
+    display: grid;                      /* layout a griglia */
 
-    /* menu - contenuto - filtri */
+    grid-template-columns:              /* menu | contenuto | filtri */
+        12%
+        1fr
+        22%;
 
-    grid-template-columns: 12% 1fr 22%;
-
-    gap: 15px;
+    gap: 1vw;                           /* spazio tra le colonne */
 
 }
 
 
-/* ===================================================== */
-/* MENU                                                  */
-/* ===================================================== */
+/* ================================================================================ */
+/* MENU                                                                              */
+/* ================================================================================ */
 
 .menu {
 
-    background: #1e4fa8;
+    background: #1e4fa8;                /* sfondo blu */
 
-    color: white;
+    color: white;                       /* testo bianco */
 
-    border-radius: 15px;
+    border-radius: 1vw;                 /* angoli arrotondati */
 
-    padding: 15px;
+    padding: 1vw;                       /* spazio interno */
 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 0.2vw 0.6vw rgba(0,0,0,0.15); /* ombra */
 
 }
 
+
+/* ================================================================================ */
+/* VOCI MENU                                                                         */
+/* ================================================================================ */
 
 .menu-item {
 
-    padding: 15px;
+    padding: 0.8vw;                     /* spazio interno */
 
-    margin-bottom: 10px;
+    margin-bottom: 0.5vw;               /* distanza dalla voce successiva */
 
-    border-radius: 8px;
+    border-radius: 0.5vw;               /* arrotondamento */
 
-    cursor: pointer;
+    cursor: pointer;                    /* cursore mano */
 
-    transition: 0.2s;
+    transition: 0.2s;                   /* animazione */
 
-    font-size: clamp(1rem, 3vw, 3rem);
+    font-size: clamp(
+        0.8rem,
+        1vw,
+        1.2rem
+    );
+
 }
 
+
+/* ================================================================================ */
+/* EFFETTO PASSAGGIO MOUSE                                                           */
+/* ================================================================================ */
 
 .menu-item:hover {
 
-    background: #2f65c8;
+    background: #2f65c8;                /* evidenziazione */
 
 }
 
+
+/* ================================================================================ */
+/* VOCE ATTIVA                                                                       */
+/* ================================================================================ */
 
 .active {
 
-    background: #ffb800;
+    background: #ffb800;                /* sfondo arancio */
 
-    color: #14376a;
+    color: #14376a;                     /* testo blu */
 
-    font-weight: bold;
+    font-weight: bold;                  /* grassetto */
 
 }
 
 
-/* ===================================================== */
-/* CONTENUTO                                             */
-/* ===================================================== */
+/* ================================================================================ */
+/* CONTENUTO CENTRALE                                                                */
+/* ================================================================================ */
 
 .content {
 
-    display: flex;
+    display: flex;                      /* layout verticale */
 
-    flex-direction: column;
+    flex-direction: column;             /* elementi uno sotto l'altro */
 
-    gap: 20px;
+    gap: 1vw;                           /* distanza tra gli elementi */
 
 }
 
 
-/* ===================================================== */
-/* TITOLI PAGINA                                         */
-/* ===================================================== */
+/* ================================================================================ */
+/* TITOLO PAGINA                                                                     */
+/* ================================================================================ */
 
 .page-title {
 
-    text-align: center;
+    text-align: center;                 /* testo centrato */
 
 }
 
+
+/* ================================================================================ */
+/* STAGIONE                                                                          */
+/* ================================================================================ */
 
 .season {
 
-    color: #345bbf;
+    color: #345bbf;                     /* colore blu */
 
-    font-size: clamp(1rem, 3vw, 3rem);
-
-    margin-bottom: 10px;
+    font-size: clamp(
+        1rem,
+        2vw,
+        2rem
+    );
 
 }
 
+
+/* ================================================================================ */
+/* NOME PAGINA                                                                       */
+/* ================================================================================ */
 
 .page-name {
 
-    color: #ff7f22;
+    color: #ff7f22;                     /* colore arancione */
 
-    font-size: clamp(1rem, 3vw, 3rem);
+    font-size: clamp(
+        1.2rem,
+        3vw,
+        3rem
+    );
+
 }
 
 
-/* ===================================================== */
-/* AREA CONTENUTI                                        */
-/* ===================================================== */
+/* ================================================================================ */
+/* AREA CONTENUTI                                                                    */
+/* ================================================================================ */
 
 .print-area {
 
-    background: white;
+    background: white;                  /* sfondo bianco */
 
-    border-radius: 15px;
+    border-radius: 1vw;                 /* angoli arrotondati */
 
-    padding: 30px;
+    padding: 2vw;                       /* spazio interno */
 
-    min-height: 600px;
+    min-height: 60vh;                   /* altezza minima */
 
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-
-}
-
-
-.print-area h2 {
-
-    color: #1e4fa8;
-
-    margin-bottom: 20px;
+    box-shadow: 0 0.3vw 1vw rgba(0,0,0,0.15); /* ombra */
 
 }
 
 
-/* ===================================================== */
-/* FILTRI                                                */
-/* ===================================================== */
+/* ================================================================================ */
+/* PANNELLO FILTRI                                                                   */
+/* ================================================================================ */
 
 .filters {
 
-    background: #1e4fa8;
+    background: #1e4fa8;                /* sfondo blu */
 
-    color: white;
+    color: white;                       /* testo bianco */
 
-    border-radius: 15px;
+    border-radius: 1vw;                 /* angoli arrotondati */
 
-    padding: 20px;
+    padding: 1vw;                       /* spazio interno */
 
-    display: flex;
+    display: flex;                      /* layout verticale */
 
-    flex-direction: column;
+    flex-direction: column;             /* elementi in colonna */
 
-    gap: 20px;
-
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-
-}
-
-
-.filter-box {
-
-    background: rgba(255,255,255,0.10);
-
-    padding: 15px;
-
-    border-radius: 10px;
-
-}
-
-
-.filter-box h3 {
-
-    margin-bottom: 15px;
-
-font-size: clamp(1rem, 3vw, 3rem);
-
-}
-
-
-select {
-
-    width: 100%;
-
-    padding: 10px;
-
-    margin-bottom: 10px;
-
-    border: none;
-
-    border-radius: 8px;
+    gap: 1vw;                           /* spazio tra gli elementi */
 
 }
