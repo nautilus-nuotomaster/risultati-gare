@@ -41,7 +41,7 @@ body {
     );
 
     display: grid;                               /* usa il sistema Grid per disporre gli elementi interni */
-height: 5vh;
+    height: 5vh;
     grid-template-columns: 10% 1fr 10%;          /* divide la testata in 3 colonne:
                                                      15% = logo
                                                      1fr = titolo (occupa tutto lo spazio rimasto)
@@ -51,7 +51,7 @@ overflow: hidden;
 
     gap: 1vw;            /* distanza tra logo, titolo e foto */
 
-    padding: 1vw;        /* bordo interno */
+    padding: 0;        /* bordo interno */
 
     border-radius: 1vw;  /* arrotondamento */
 
