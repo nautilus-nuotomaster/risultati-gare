@@ -41,7 +41,7 @@ body {
     );
 
     display: grid;                               /* usa il sistema Grid per disporre gli elementi interni */
-height: 18vh;
+height: 12vh;
     grid-template-columns: 15% 1fr 15%;          /* divide la testata in 3 colonne:
                                                      15% = logo
                                                      1fr = titolo (occupa tutto lo spazio rimasto)
