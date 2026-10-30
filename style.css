@@ -41,12 +41,12 @@ body {
     );
 
     display: grid;                               /* usa il sistema Grid per disporre gli elementi interni */
-
-    grid-template-columns: 20% 1fr 20%;          /* divide la testata in 3 colonne:
-                                                     20% = logo
+height: 18vh;
+    grid-template-columns: 15% 1fr 15%;          /* divide la testata in 3 colonne:
+                                                     15% = logo
                                                      1fr = titolo (occupa tutto lo spazio rimasto)
-                                                     20% = foto */
-
+                                                     15% = foto */
+overflow: hidden;
     align-items: center;                         /* centra verticalmente logo, titolo e foto */
 
     gap: 1vw;            /* distanza tra logo, titolo e foto */
@@ -79,7 +79,11 @@ body {
 
 .logo img {
 
-    width: 80%;
+    max-height: 90%;
+
+    max-width: 90%;
+
+    width: auto;
 
     height: auto;
 
@@ -123,17 +127,20 @@ body {
 
     justify-content: center;
 
+    align-items: center;
+
 }
 
 
 .pool-photo img {
 
-       max-width: 250px;
+    max-height: 90%;
 
-   width: 100%;
+    max-width: 90%;
+
+    width: auto;
 
     height: auto;
-
 }
 
 
