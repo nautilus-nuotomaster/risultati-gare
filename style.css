@@ -42,9 +42,9 @@ body {
 
     display: grid;                               /* usa una griglia */
 
-    grid-template-columns: 10% 1fr 10%;          /* logo | titolo | foto */
+    grid-template-columns: 15% 1fr 15%;          /* logo | titolo | foto */
 
-    height: 15vh;                                /* altezza della testata = 15% dell'altezza schermo */
+    height: 20vh;                                /* altezza della testata = 15% dell'altezza schermo */
 
     gap: 1vw;                                    /* spazio tra le 3 colonne */
 
