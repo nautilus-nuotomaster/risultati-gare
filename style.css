@@ -319,7 +319,7 @@ select {
 /* sotto 1200 pixel                                       */
 /* ===================================================== */
 
-@media (max-width: 1200px) {
+/*@media (max-width: 1200px) {
 
     .container {
 
@@ -337,7 +337,7 @@ select {
 
     }
 
-}
+}*/
 
 
 /* ===================================================== */
@@ -345,7 +345,7 @@ select {
 /* sotto 768 pixel                                        */
 /* ===================================================== */
 
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
 
     body {
 
@@ -354,9 +354,7 @@ select {
 
     .header {
 
-        /*
-
-        logo
+        /*        logo
 
         titolo
 
@@ -369,7 +367,7 @@ select {
         grid-template-columns: 1fr;
 
         text-align: center;
-    }
+    }*/
 
     .logo-container img {
 
