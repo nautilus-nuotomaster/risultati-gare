@@ -32,87 +32,119 @@ body {
 /* TESTATA                                               */
 /* ===================================================== */
 
-.header {                                        /* regole che verranno applicate all'elemento con class="header" */
+.header {
 
-    background: linear-gradient(                 /* crea uno sfondo sfumato */
-        90deg,                                   /* direzione della sfumatura: da sinistra a destra */
+    background: linear-gradient(                 /* sfondo sfumato */
+        90deg,                                   /* da sinistra verso destra */
         #1e4fa8,                                 /* colore iniziale */
         #4c7ddd                                  /* colore finale */
     );
 
-    display: grid;                               /* usa il sistema Grid per disporre gli elementi interni */
-    height: 15vh;
-    grid-template-columns: 10% 1fr 10%;          /* divide la testata in 3 colonne:
-                                                     15% = logo
-                                                     1fr = titolo (occupa tutto lo spazio rimasto)
-                                                     15% = foto */
-overflow: hidden;
-    align-items: center;                         /* centra verticalmente logo, titolo e foto */
+    display: grid;                               /* usa una griglia */
 
-    gap: 1vw;            /* distanza tra logo, titolo e foto */
+    grid-template-columns: 10% 1fr 10%;          /* logo | titolo | foto */
 
-    padding: 0;        /* bordo interno */
+    height: 15vh;                                /* altezza della testata = 15% dell'altezza schermo */
 
-    border-radius: 1vw;  /* arrotondamento */
+    gap: 1vw;                                    /* spazio tra le 3 colonne */
 
-    margin-bottom: 1vw;  /* distanza dalla sezione sotto */
+    align-items: center;                         /* centra verticalmente tutto il contenuto */
 
-    color: white;                                /* imposta il colore del testo a bianco */
+    border-radius: 1vw;                          /* arrotondamento proporzionale */
+
+    margin-bottom: 1vw;                          /* spazio sotto la testata */
+
+    color: white;                                /* colore del testo */
+
+    overflow: hidden;                            /* nasconde ciò che esce dalla testata */
 
 }
 
 
+
+
 /* ===================================================== */
-/* LOGO                                                  */
+/* CONTENITORE LOGO                                      */
 /* ===================================================== */
 
 .logo {
 
-    display: flex;
+    height: 100%;                                /* alto quanto la testata */
 
-    justify-content: center;
+    display: flex;                               /* usa flexbox */
 
-    align-items: center;
+    justify-content: center;                     /* centra orizzontalmente */
 
-}
-
-
-.logo img {
-
-    max-height: 90%;
-
-    max-width: 90%;
-
-    width: auto;
-
-    height: auto;
+    align-items: center;                         /* centra verticalmente */
 
 }
 
 
 /* ===================================================== */
-/* TITOLO                                                */
+/* IMMAGINE LOGO                                         */
+/* ===================================================== */
+
+.logo img {
+
+    max-height: 80%;                             /* massimo 80% dell'altezza del contenitore logo */
+
+    max-width: 100%;                             /* non oltrepassa la larghezza disponibile */
+
+    width: auto;                                 /* calcola automaticamente la larghezza */
+
+    height: auto;                                /* mantiene le proporzioni originali */
+
+}
+
+
+/* ===================================================== */
+/* TITOLO CENTRALE                                       */
 /* ===================================================== */
 
 .site-title {
 
-    text-align: center;
+    text-align: center;                          /* testo centrato */
 
 }
 
+
+/* ===================================================== */
+/* TITOLO PRINCIPALE                                     */
+/* ===================================================== */
 
 .site-title h1 {
 
-    font-size: clamp(1rem, 3vw, 3rem);
+    font-size: 3vh;                              /* dimensione basata sull'altezza dello schermo */
 
-    margin-bottom: 10px;
+    margin-bottom: 0.5vh;                        /* piccolo spazio sotto */
 
 }
 
 
+/* ===================================================== */
+/* SOTTOTITOLO                                           */
+/* ===================================================== */
+
 .site-title p {
 
-    font-size: clamp(12px, 1.2vw, 24px);
+    font-size: 1.5vh;                            /* metà circa del titolo principale */
+
+}
+
+
+/* ===================================================== */
+/* CONTENITORE FOTO                                      */
+/* ===================================================== */
+
+.pool-photo {
+
+    height: 100%;                                /* alto quanto la testata */
+
+    display: flex;                               /* usa flexbox */
+
+    justify-content: center;                     /* centra orizzontalmente */
+
+    align-items: center;                         /* centra verticalmente */
 
 }
 
@@ -121,26 +153,16 @@ overflow: hidden;
 /* FOTO                                                  */
 /* ===================================================== */
 
-.pool-photo {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-}
-
-
 .pool-photo img {
 
-    max-height: 90%;
+    max-height: 80%;                             /* massimo 80% dell'altezza del contenitore */
 
-    max-width: 90%;
+    max-width: 100%;                             /* non supera la larghezza disponibile */
 
-    width: auto;
+    width: auto;                                 /* mantiene le proporzioni */
 
-    height: auto;
+    height: auto;                                /* mantiene le proporzioni */
+
 }
 
 
