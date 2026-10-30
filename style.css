@@ -31,19 +31,13 @@ body {
 
     display: grid;
 
-    /*
+   /* menu 15% */
+    /* contenuto tutto lo spazio disponibile */
+    /* filtri 20% */
 
-    menu = 15%
+    grid-template-columns: 15% 1fr 20%;
 
-    contenuto = tutto lo spazio disponibile
-
-    filtri = 25%
-
-    */
-
-    grid-template-columns: 15% 1fr 25%;
-
-    gap: 15px;
+    gap: 1%;
 }
 
 
@@ -133,20 +127,13 @@ body {
 
     */
 
-    grid-template-columns: 15% 1fr 25%;
+   grid-template-columns: 15% 1fr 20%;
 
     align-items: center;
 
-    gap: 20px;
-
-    padding: 20px;
-
-    border-radius: 15px;
-
     color: white;
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
+    }
 
 
 /* ===================================================== */
@@ -188,15 +175,13 @@ body {
 
     */
 
-    font-size: clamp(24px, 3vw, 48px);
-
-    margin-bottom: 8px;
+   font-size: 2.8vw;
 }
 
 
 .title-container h2 {
 
-    font-size: clamp(14px, 1.5vw, 24px);
+    font-size: 1.4vw;
 
     font-weight: normal;
 }
@@ -232,11 +217,11 @@ body {
 
     color: #345bbf;
 
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
 
     /* si adatta automaticamente */
 
-    font-size: clamp(24px, 3vw, 50px);
+   font-size: 3vw;
 }
 
 
@@ -244,7 +229,7 @@ body {
 
     color: #ff7f22;
 
-    font-size: clamp(30px, 4vw, 70px);
+    font-size: 4vw;
 }
 
 
@@ -388,20 +373,18 @@ select {
 
     .logo-container img {
 
-        width: 80px;
+        width: 100%;
 
-        height: 80px;
-
-        margin: auto;
+    height: auto;
     }
 
     .pool-photo img {
 
-        max-width: 250px;
+      width: 100%;
 
-        margin: auto;
+    height: auto;
 
-        display: block;
+    /*    display: block; */
     }
 
     .print-area {
