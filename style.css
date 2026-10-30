@@ -32,33 +32,32 @@ body {
 /* TESTATA                                               */
 /* ===================================================== */
 
-.header {
+.header {                                        /* regole che verranno applicate all'elemento con class="header" */
 
-    background: linear-gradient(
-        90deg,
-        #1e4fa8,
-        #4c7ddd
+    background: linear-gradient(                 /* crea uno sfondo sfumato */
+        90deg,                                   /* direzione della sfumatura: da sinistra a destra */
+        #1e4fa8,                                 /* colore iniziale */
+        #4c7ddd                                  /* colore finale */
     );
 
-    display: grid;
+    display: grid;                               /* usa il sistema Grid per disporre gli elementi interni */
 
-    /* logo - titolo - foto */
+    grid-template-columns: 20% 1fr 20%;          /* divide la testata in 3 colonne:
+                                                     20% = logo
+                                                     1fr = titolo (occupa tutto lo spazio rimasto)
+                                                     20% = foto */
 
-    grid-template-columns: 25% 1fr 20%;
+    align-items: center;                         /* centra verticalmente logo, titolo e foto */
 
-    align-items: center;
+    gap: 1vw;            /* distanza tra logo, titolo e foto */
 
-    gap: 20px;
+    padding: 1vw;        /* bordo interno */
 
-    padding: 20px;
+    border-radius: 1vw;  /* arrotondamento */
 
-    border-radius: 15px;
+    margin-bottom: 1vw;  /* distanza dalla sezione sotto */
 
-    color: white;
-
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-
-    margin-bottom: 15px;
+    color: white;                                /* imposta il colore del testo a bianco */
 
 }
 
@@ -80,9 +79,7 @@ body {
 
 .logo img {
 
-    width: 100%;
-
-    max-width: 300px;
+    width: 80%;
 
     height: auto;
 
@@ -102,7 +99,7 @@ body {
 
 .site-title h1 {
 
-    font-size: clamp(18px, 2.5vw, 60px);
+    font-size: clamp(1rem, 3vw, 3rem);
 
     margin-bottom: 10px;
 
@@ -131,15 +128,11 @@ body {
 
 .pool-photo img {
 
-    width: 100%;
+       max-width: 250px;
 
-    max-width: 250px;
+   width: 100%;
 
     height: auto;
-
-    border-radius: 10px;
-
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
 
 }
 
@@ -192,8 +185,7 @@ body {
 
     transition: 0.2s;
 
-    font-size: clamp(12px, 1vw, 22px);
-
+    font-size: clamp(1rem, 3vw, 3rem);
 }
 
 
@@ -245,7 +237,7 @@ body {
 
     color: #345bbf;
 
-    font-size: clamp(24px, 3vw, 60px);
+    font-size: clamp(1rem, 3vw, 3rem);
 
     margin-bottom: 10px;
 
@@ -256,8 +248,7 @@ body {
 
     color: #ff7f22;
 
-    font-size: clamp(30px, 4vw, 70px);
-
+    font-size: clamp(1rem, 3vw, 3rem);
 }
 
 
@@ -329,7 +320,7 @@ body {
 
     margin-bottom: 15px;
 
-    font-size: clamp(14px, 1.4vw, 32px);
+font-size: clamp(1rem, 3vw, 3rem);
 
 }
 
