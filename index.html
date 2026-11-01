@@ -145,14 +145,23 @@
             </div> <!-- FINE PAGE-TITLE -->
 
 
-            <!-- ================================================= -->
-            <!-- AREA CONTENUTI                                    -->
-            <!-- ================================================= -->
+            <!-- ========================================================= -->
+            <!-- AREA CONTENUTI                                            -->
+            <!-- ========================================================= -->
+
+            <div class="page-title"> <!-- INIZIO PAGE-TITLE -->
+
+                <div id="titoloStagione" class="season"> <!-- INIZIO SEASON -->
+                </div> <!-- FINE SEASON -->
+
+                <div id="titoloStampa" class="page-name"> <!-- INIZIO PAGE-NAME -->
+                </div> <!-- FINE PAGE-NAME -->
+
+            </div> <!-- FINE PAGE-TITLE -->
 
             <div class="print-area"> <!-- INIZIO PRINT-AREA -->
 
-                <iframe id="contenutoStampa" src="risultati/RISGARE_2026.html"
-                    style="width:100%; height:800px; border:none;">
+                <iframe id="contenutoStampa" style="width:100%; height:800px; border:none;">
                 </iframe>
 
             </div> <!-- FINE PRINT-AREA -->
@@ -166,30 +175,58 @@
     <!-- CARICAMENTO COMBO STAGIONI                               -->
     <!-- ========================================================= -->
 
-    <script>                                                              /* INIZIO SCRIPT */
+    <script>                                                    /* INIZIO SCRIPT */
 
-        const stagioniDisponibili = [2026];                               /* stagioni pubblicate */
+        const stagioniDisponibili = [2026, 2025];               /* da generare automaticamente */
 
-        const cmbStagione = document.getElementById('cmbStagione');        /* recupera la combo */
+        const cmbStagione =
+            document.getElementById('cmbStagione');             /* combo stagione */
 
-        stagioniDisponibili.forEach(stagione => {                         /* ciclo stagioni */
+        stagioniDisponibili.forEach(stagione => {               /* carica combo */
 
-            const option = document.createElement('option');              /* crea opzione */
+            const option =
+                document.createElement('option');
 
-            option.value = stagione;                                      /* valore interno */
+            option.value = stagione;
 
-            option.textContent = `${stagione}/${stagione + 1}`;           /* testo visibile */
+            option.textContent =
+                `${stagione}/${stagione + 1}`;
 
-            cmbStagione.appendChild(option);                              /* aggiunge opzione */
+            cmbStagione.appendChild(option);
 
         });
-    const stagioneCorrente = 2026; // stagione caricata all'avvio
 
-    document.getElementById('titoloStagione').textContent =
-    'STAGIONE ' + stagioneCorrente + '/' + (stagioneCorrente + 1); // aggiorna il titolo stagione
+        function aggiornaPagina() {                             /* aggiorna titoli e iframe */
 
-    document.getElementById('titoloStampa').textContent =
-    'RISULTATI GARE'; // aggiorna il titolo stampa
+            const stagione =
+                parseInt(cmbStagione.value);                    /* stagione selezionata */
+
+            document.getElementById('titoloStagione').textContent =
+                'STAGIONE ' +
+                stagione +
+                '/' +
+                (stagione + 1);
+
+            document.getElementById('titoloStampa').textContent =
+                'RISULTATI GARE';
+
+            document.getElementById('contenutoStampa').src =
+                'risultati/RISGARE_' +
+                stagione +
+                '.html';
+
+        }
+
+        cmbStagione.addEventListener(
+            'change',
+            aggiornaPagina
+        );                                                     /* cambio stagione */
+
+        cmbStagione.value =
+            stagioniDisponibili[0];                            /* stagione più recente */
+
+        aggiornaPagina();                                      /* caricamento iniziale */
+
     </script> <!-- FINE SCRIPT -->
 
 </body> <!-- FINE BODY -->
