@@ -279,12 +279,12 @@ select {
 .season {
     color: #345bbf;
     font-size: 20px;                    /* stagione */
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .page-name {
     color: #ff7f22;
-    font-size: 24px;                    /* risultati gare */
+    font-size: 20px;                    /* risultati gare */
 }
 
 
