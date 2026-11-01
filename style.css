@@ -75,7 +75,7 @@ body {
 
 .logo img {
 
-    width: 100px;                       /* larghezza logo */
+    width: 80px;                       /* larghezza logo */
 
     height: auto;                       /* mantiene proporzioni */
 
@@ -95,7 +95,7 @@ body {
 
 .site-title h1 {
 
-    font-size: 42px;                    /* titolo principale */
+    font-size: 35px;                    /* titolo principale */
 
     margin-bottom: 5px;                 /* spazio sotto */
 
@@ -122,7 +122,7 @@ body {
 
 .pool-photo img {
 
-    width: 160px;                       /* larghezza foto */
+    width: 100px;                       /* larghezza foto */
 
     height: auto;                       /* mantiene proporzioni */
 
@@ -140,10 +140,10 @@ body {
     display: grid;                      /* layout a griglia */
 
     grid-template-columns:
-        260px                           /* colonna sinistra */
+        220px                           /* colonna sinistra */
         1fr;                            /* contenuto */
 
-    gap: 20px;                          /* spazio tra le colonne */
+    gap: 10px;                          /* spazio tra le colonne */
 
 }
 
@@ -278,13 +278,13 @@ select {
 
 .season {
     color: #345bbf;
-    font-size: 24px;                    /* stagione */
+    font-size: 20px;                    /* stagione */
     margin-bottom: 5px;
 }
 
 .page-name {
     color: #ff7f22;
-    font-size: 36px;                    /* risultati gare */
+    font-size: 24px;                    /* risultati gare */
 }
 
 
