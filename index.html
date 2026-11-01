@@ -1,126 +1,195 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- DICHIARAZIONE HTML -->
 
-<html lang="it">
+<html lang="it"> <!-- INIZIO HTML -->
 
-<head>
+<head> <!-- INIZIO HEAD -->
 
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> <!-- codifica caratteri -->
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- responsive -->
 
-    <title>Nuoto Master Nautilus</title>
+    <title>Nuoto Master Nautilus</title> <!-- titolo pagina -->
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> <!-- foglio di stile -->
 
-</head>
+</head> <!-- FINE HEAD -->
 
-<body>
+<body> <!-- INIZIO BODY -->
 
-    <!-- TESTATA -->
+    <!-- ========================================================= -->
+    <!-- TESTATA                                                   -->
+    <!-- ========================================================= -->
 
-    <div class="header">
+    <div class="header"> <!-- INIZIO HEADER -->
 
-        <div class="logo">
+        <div class="logo"> <!-- INIZIO LOGO -->
 
             <img src="img/logo.png" alt="Logo Nautilus">
 
-        </div>
+        </div> <!-- FINE LOGO -->
 
-        <div class="site-title">
+        <div class="site-title"> <!-- INIZIO SITE-TITLE -->
 
             <h1>NAUTILUS - NUOTO MASTER</h1>
 
             <p>Classifiche e risultati gare</p>
 
-        </div>
+        </div> <!-- FINE SITE-TITLE -->
 
-        <div class="pool-photo">
+        <div class="pool-photo"> <!-- INIZIO POOL-PHOTO -->
 
             <img src="img/piscina.png" alt="Piscina">
 
-        </div>
+        </div> <!-- FINE POOL-PHOTO -->
 
-    </div>
+    </div> <!-- FINE HEADER -->
 
 
+    <!-- ========================================================= -->
+    <!-- CONTENUTO PRINCIPALE                                      -->
+    <!-- ========================================================= -->
 
-    <!-- CONTENUTO PRINCIPALE -->
+    <div class="container"> <!-- INIZIO CONTAINER -->
 
-    <div class="container">
+
+        <!-- ===================================================== -->
+        <!-- COLONNA SINISTRA                                      -->
+        <!-- ===================================================== -->
 
         <div class="sidebar"> <!-- INIZIO SIDEBAR -->
-            <div class="filter-box"><!-- INIZIO filter -->
 
-                <h3>STAGIONE</h3>
 
-                <select id="cmbStagione"></select>
-            </div> <!-- chiude filter -->
-            <div class="menu"> <!-- INIZIO menu -->
+            <!-- ================================================= -->
+            <!-- STAGIONE E FILTRI                                -->
+            <!-- ================================================= -->
 
-                <div class="menu-item active">
+            <div class="filter-box"> <!-- INIZIO FILTER-BOX -->
+
+                <h3>STAGIONE</h3> <!-- titolo stagione -->
+
+                <select id="cmbStagione"></select> <!-- combo stagioni -->
+
+                <h3>FILTRA PER</h3> <!-- titolo filtri -->
+
+                <select> <!-- INIZIO SELECT ATLETA -->
+
+                    <option>Atleta</option>
+
+                </select> <!-- FINE SELECT ATLETA -->
+
+                <select> <!-- INIZIO SELECT MANIFESTAZIONE -->
+
+                    <option>Manifestazione</option>
+
+                </select> <!-- FINE SELECT MANIFESTAZIONE -->
+
+            </div> <!-- FINE FILTER-BOX -->
+
+
+            <!-- ================================================= -->
+            <!-- MENU                                              -->
+            <!-- ================================================= -->
+
+            <div class="menu"> <!-- INIZIO MENU -->
+
+                <div class="menu-item active"> <!-- INIZIO MENU-ITEM -->
+
                     <a href="risultati/RISGARE_2026.html">Risultati gare</a>
-                </div>
 
-                <div class="menu-item">
+                </div> <!-- FINE MENU-ITEM -->
+
+                <div class="menu-item"> <!-- INIZIO MENU-ITEM -->
+
                     Classifica Iron
-                </div>
 
-                <div class="menu-item">
+                </div> <!-- FINE MENU-ITEM -->
+
+                <div class="menu-item"> <!-- INIZIO MENU-ITEM -->
+
                     Miglior punteggio
-                </div>
 
-                <div class="menu-item">
+                </div> <!-- FINE MENU-ITEM -->
+
+                <div class="menu-item"> <!-- INIZIO MENU-ITEM -->
+
                     Regolamento Iron
-                </div>
 
-            </div> <!-- chiusura menu -->
+                </div> <!-- FINE MENU-ITEM -->
 
-            <h3>FILTRA PER</h3>
+            </div> <!-- FINE MENU -->
 
-            <select>
-                <option>Atleta</option>
-            </select>
-
-            <select>
-                <option>Manifestazione</option>
-            </select>
-
-        </div> <!-- chiude menu -->
-
-    </div> <!-- chiusura sidebar -->
+        </div> <!-- FINE SIDEBAR -->
 
 
-    <!-- CONTENUTO -->
+        <!-- ===================================================== -->
+        <!-- COLONNA CENTRALE                                      -->
+        <!-- ===================================================== -->
 
-    <div class="content">
+        <div class="content"> <!-- INIZIO CONTENT -->
 
-        <div class="page-title">
 
-            <div class="season">
+            <!-- ================================================= -->
+            <!-- TITOLO PAGINA                                     -->
+            <!-- ================================================= -->
 
-                STAGIONE 2026/2027
+            <div class="page-title"> <!-- INIZIO PAGE-TITLE -->
 
-            </div>
+                <div class="season"> <!-- INIZIO SEASON -->
 
-            <div class="page-name">
+                    STAGIONE 2026/2027
 
-                RISULTATI GARE
+                </div> <!-- FINE SEASON -->
 
-            </div>
+                <div class="page-name"> <!-- INIZIO PAGE-NAME -->
 
-        </div>
+                    RISULTATI GARE
 
-        <div class="print-area"> <!-- INIZIO PRINT-AREA -->
+                </div> <!-- FINE PAGE-NAME -->
 
-            <iframe id="contenutoStampa" <!-- contenitore della stampa -->
-                src="risultati/RISGARE_2026.html" <!-- stampa caricata all'avvio -->
-                style="width:100%; height:800px; border:none;"> <!-- dimensioni iframe -->
-            </iframe>
+            </div> <!-- FINE PAGE-TITLE -->
 
-        </div> <!-- FINE PRINT-AREA -->
 
-      </div>
+            <!-- ================================================= -->
+            <!-- AREA CONTENUTI                                    -->
+            <!-- ================================================= -->
 
-</body>
+            <div class="print-area"> <!-- INIZIO PRINT-AREA -->
 
-</html>
+                <iframe id="contenutoStampa" src="risultati/RISGARE_2026.html"
+                    style="width:100%; height:800px; border:none;">
+                </iframe>
+
+            </div> <!-- FINE PRINT-AREA -->
+
+        </div> <!-- FINE CONTENT -->
+
+    </div> <!-- FINE CONTAINER -->
+
+
+    <!-- ========================================================= -->
+    <!-- CARICAMENTO COMBO STAGIONI                               -->
+    <!-- ========================================================= -->
+
+    <script>                                                              /* INIZIO SCRIPT */
+
+        const stagioniDisponibili = [2026];                               /* stagioni pubblicate */
+
+        const cmbStagione = document.getElementById('cmbStagione');        /* recupera la combo */
+
+        stagioniDisponibili.forEach(stagione => {                         /* ciclo stagioni */
+
+            const option = document.createElement('option');              /* crea opzione */
+
+            option.value = stagione;                                      /* valore interno */
+
+            option.textContent = `${stagione}/${stagione + 1}`;           /* testo visibile */
+
+            cmbStagione.appendChild(option);                              /* aggiunge opzione */
+
+        });
+
+    </script> <!-- FINE SCRIPT -->
+
+</body> <!-- FINE BODY -->
+
+</html> <!-- FINE HTML -->
