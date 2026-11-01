@@ -104,17 +104,17 @@
 
                 <h3>FILTRA PER</h3> <!-- titolo filtri -->
 
-                <select> <!-- INIZIO SELECT ATLETA -->
+                <input
+    id="txtAtleta"
+    type="text"
+    placeholder="Scrivi atleta..."
+    oninput="applicaFiltri()">                    <!-- filtro atleta -->
 
-                    <option>Atleta</option>
-
-                </select> <!-- FINE SELECT ATLETA -->
-
-                <select> <!-- INIZIO SELECT MANIFESTAZIONE -->
-
-                    <option>Manifestazione</option>
-
-                </select> <!-- FINE SELECT MANIFESTAZIONE -->
+<input
+    id="txtManifestazione"
+    type="text"
+    placeholder="Scrivi manifestazione..."
+    oninput="applicaFiltri()">                    <!-- filtro manifestazione -->
 
             </div> <!-- FINE FILTER-BOX -->
 
@@ -226,7 +226,60 @@
             stagioniDisponibili[0];                            /* stagione più recente */
 
         aggiornaPagina();                                      /* caricamento iniziale */
+function applicaFiltri() {                                     // applica i filtri
 
+    const atleta =
+        document.getElementById('txtAtleta')
+        .value
+        .trim()
+        .toUpperCase();                                        // atleta cercato
+
+    const manifestazione =
+        document.getElementById('txtManifestazione')
+        .value
+        .trim()
+        .toUpperCase();                                        // manifestazione cercata
+
+    const iframe =
+        document.getElementById('contenutoStampa');            // iframe risultati
+
+    const righe =
+        iframe.contentWindow.document.querySelectorAll(
+            '#corpoTabella tr'
+        );                                                     // righe tabella
+
+    righe.forEach(riga => {
+
+        const atletaRiga =
+            riga.dataset.atleta.toUpperCase();                 // atleta riga
+
+        const manifestazioneRiga =
+            riga.dataset.manifestazione.toUpperCase();         // manifestazione riga
+
+        let visibile = true;                                   // inizialmente visibile
+
+        if (
+            atleta !== '' &&
+            !atletaRiga.includes(atleta)
+        ) {
+            visibile = false;
+        }
+
+        if (
+            manifestazione !== '' &&
+            !manifestazioneRiga.includes(manifestazione)
+        ) {
+            visibile = false;
+        }
+
+        riga.style.display =
+            visibile
+                ? 'table-row'
+                : 'none';
+
+    });
+
+}
     </script> <!-- FINE SCRIPT -->
 
 </body> <!-- FINE BODY -->
