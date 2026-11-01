@@ -282,7 +282,7 @@ select {
 
     color: #345bbf;
 
-    font-size: 2.5rem;
+    font-size: 1.5rem;
 
     margin-bottom: 0.5rem;
 
@@ -293,7 +293,7 @@ select {
 
     color: #ff7f22;
 
-    font-size: 3rem;
+    font-size: 2rem;
 
 }
 
@@ -306,9 +306,9 @@ select {
 
     background: white;
 
-    border-radius: 15px;
+    border-radius: 10px;
 
-    padding: 30px;
+    padding: 20px;
 
     min-height: 600px;
 
