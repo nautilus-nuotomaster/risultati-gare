@@ -312,3 +312,23 @@ select {
     margin-bottom: 20px;
 
 }
+/* ===================================================== */
+/* CAMPI FILTRO                                           */
+/* ===================================================== */
+
+#txtAtleta,
+#txtManifestazione {
+
+    width: 100%;                     /* occupa tutta la larghezza */
+
+    padding: 10px;                   /* spazio interno */
+
+    margin-bottom: 10px;             /* distanza dal controllo successivo */
+
+    border-radius: 8px;              /* angoli arrotondati */
+
+    border: none;                    /* elimina bordo standard */
+
+    font-size: 18px;                 /* dimensione testo */
+
+}
