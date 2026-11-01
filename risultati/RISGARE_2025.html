@@ -1,0 +1,4027 @@
+
+<!DOCTYPE html>
+
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">                     <!-- codifica UTF8 -->
+
+<title>RISGARE_2025</title>                     <!-- titolo della scheda browser -->
+
+</head>
+<script>
+
+function applicaFiltri() {
+   const atleta =                                                    // legge il testo atleta
+        document.getElementById('txtAtleta')
+        .value
+        .trim()
+        .toUpperCase();
+
+    const manifestazione =                                             // legge il testo manifestazione
+        document.getElementById('txtManifestazione')
+        .value
+        .trim()
+        .toUpperCase();
+
+    const righe =                                                     // recupera tutte le righe
+        document.querySelectorAll('#corpoTabella tr');
+
+    righe.forEach(
+        function(riga) {
+
+            const testoAtleta =
+    riga.dataset.atleta              // legge data-atleta
+        .trim()
+        .toUpperCase();
+
+            const testoManifestazione =
+    riga.dataset.manifestazione      // legge data-manifestazione
+        .trim()
+        .toUpperCase();
+
+            let visibile = true;                                      // inizialmente visibile
+
+            if (
+                atleta !== '' &&                                      // filtro atleta valorizzato
+                !testoAtleta.includes(atleta)                         // atleta non trovato
+            ) {
+                visibile = false;                                     // nasconde la riga
+            }
+
+            if (
+                manifestazione !== '' &&                              // filtro manifestazione valorizzato
+                !testoManifestazione.includes(manifestazione)         // manifestazione non trovata
+            ) {
+                visibile = false;                                     // nasconde la riga
+            }
+
+            riga.style.display =                                      // mostra o nasconde
+                visibile
+                    ? 'table-row'                                     // visualizza la riga
+                    : 'none';                                         // nasconde la riga
+
+        }
+    );
+
+
+}
+
+function ordinaTabella(campo) {                                        // ordina la tabella
+
+    const corpoTabella =
+        document.getElementById('corpoTabella');                       // tbody risultati
+
+    const righe =
+        Array.from(
+            corpoTabella.querySelectorAll('tr')
+        );                                                             // tutte le righe
+
+    righe.sort(
+        function(a, b) {
+
+            // ==========================================================
+            // ATLETA
+            // ==========================================================
+
+            if (campo === 'atleta') {
+
+                return a.dataset.atleta
+                    .localeCompare(
+                        b.dataset.atleta
+                    );
+
+            }
+
+            // ==========================================================
+            // GARA
+            // ==========================================================
+
+            if (campo === 'gara') {
+
+                return a.dataset.gara
+                    .localeCompare(
+                        b.dataset.gara
+                    );
+
+            }
+
+            // ==========================================================
+            // MANIFESTAZIONE
+            // prima data più recente
+            // poi nome manifestazione
+            // ==========================================================
+
+            if (campo === 'manifestazione') {
+
+                const dataA =
+                    new Date(a.dataset.data);                          // data riga A
+
+                const dataB =
+                    new Date(b.dataset.data);                          // data riga B
+
+                const confrontoDate =
+                    dataB - dataA;                                    // ordine decrescente
+
+                if (confrontoDate !== 0) {
+
+                    return confrontoDate;                             // prevale la data
+
+                }
+
+                return a.dataset.manifestazione
+                    .localeCompare(
+                        b.dataset.manifestazione
+                    );
+
+            }
+
+            // ==========================================================
+            // DATA
+            // ==========================================================
+
+            if (campo === 'data') {
+
+                return (
+                    new Date(b.dataset.data) -
+                    new Date(a.dataset.data)
+                );
+
+            }
+
+            // ==========================================================
+            // PUNTEGGIO
+            // ==========================================================
+
+            if (campo === 'punteggio') {
+
+                return (
+                    parseFloat(b.dataset.punteggio) -
+                    parseFloat(a.dataset.punteggio)
+                );
+
+            }
+
+            // ==========================================================
+            // TEMPO
+            // ==========================================================
+
+            if (campo === 'tempo') {
+
+                return a.dataset.tempo
+                    .localeCompare(
+                        b.dataset.tempo
+                    );
+
+            }
+
+            return 0;                                                 // criterio sconosciuto
+
+        }
+    );
+
+    righe.forEach(
+        function(riga) {
+
+            corpoTabella.appendChild(riga);                           // riscrive la riga ordinata
+
+        }
+    );
+
+}
+</script>
+<body>
+
+<!-- =============================================================== -->
+<!-- TITOLO PAGINA                                                   -->
+<!-- =============================================================== -->
+
+<!-- =============================================================== -->
+<!-- FILTRI GESTITI DALLA PAGINA PRINCIPALE DEL SITO                 -->
+<!-- =============================================================== -->
+
+<!-- =============================================================== -->
+<!-- TABELLA RISULTATI                                               -->
+<!-- =============================================================== -->
+
+<table id="tabellaRisultati" border="1"> <!-- tabella risultati -->
+
+<thead>
+
+<tr>
+
+    <th>Cat.</th>
+
+     <th onclick="ordinaTabella('atleta')" style="cursor:pointer">
+    Atleta ↕
+</th>
+
+    <th>Anno</th>
+
+<th onclick="ordinaTabella('gara')" style="cursor:pointer">
+    Gara ↕
+</th>
+
+<th onclick="ordinaTabella('tempo')" style="cursor:pointer">
+    Tempo ↕
+</th>
+
+<th onclick="ordinaTabella('punteggio')" style="cursor:pointer">
+    Punti ↕
+</th>
+ <th>Pos.</th>
+<th onclick="ordinaTabella('manifestazione')" style="cursor:pointer">
+    Manifestazione ↕
+</th>
+
+<th onclick="ordinaTabella('data')" style="cursor:pointer">
+    Data ↕
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="corpoTabella">
+
+
+<tr
+    data-atleta="AGRESTA CHIARA"                     // atleta
+    data-gara="100farfalla"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="784.3"               // punteggio
+    data-tempo="01:17:17"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>AGRESTA CHIARA</td>
+
+    <td>2004</td>
+
+    <td>100farfalla</td>
+
+    <td>01:17:17</td>
+
+    <td>784.3</td>
+
+    <td>10</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="AGRESTA CHIARA"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="848.4"               // punteggio
+    data-tempo="01:07:07"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>AGRESTA CHIARA</td>
+
+    <td>2004</td>
+
+    <td>100stile</td>
+
+    <td>01:07:07</td>
+
+    <td>848.4</td>
+
+    <td>26</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="AGRESTA CHIARA"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="853.5"               // punteggio
+    data-tempo="02:24:24"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>AGRESTA CHIARA</td>
+
+    <td>2004</td>
+
+    <td>200stile</td>
+
+    <td>02:24:24</td>
+
+    <td>853.5</td>
+
+    <td>10</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ALABYAD JOSSEF"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="784.2"               // punteggio
+    data-tempo="00:29:29"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ALABYAD JOSSEF</td>
+
+    <td>1998</td>
+
+    <td>50stile</td>
+
+    <td>00:29:29</td>
+
+    <td>784.2</td>
+
+    <td>48</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="BENNANI TOMMASO"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="694.7"               // punteggio
+    data-tempo="05:45:45"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>BENNANI TOMMASO</td>
+
+    <td>2006</td>
+
+    <td>400stile</td>
+
+    <td>05:45:45</td>
+
+    <td>694.7</td>
+
+    <td>1</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="BENNANI TOMMASO"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="750.7"               // punteggio
+    data-tempo="00:30:30"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>BENNANI TOMMASO</td>
+
+    <td>2006</td>
+
+    <td>50stile</td>
+
+    <td>00:30:30</td>
+
+    <td>750.7</td>
+
+    <td>9</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="BIANCHI SAMANTHA"                     // atleta
+    data-gara="50farfalla"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="740.0"               // punteggio
+    data-tempo="00:39:39"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>BIANCHI SAMANTHA</td>
+
+    <td>1981</td>
+
+    <td>50farfalla</td>
+
+    <td>00:39:39</td>
+
+    <td>740.0</td>
+
+    <td>2</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="BIANCHI SAMANTHA"                     // atleta
+    data-gara="200misti"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="813.3"               // punteggio
+    data-tempo="03:06:06"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>BIANCHI SAMANTHA</td>
+
+    <td>1981</td>
+
+    <td>200misti</td>
+
+    <td>03:06:06</td>
+
+    <td>813.3</td>
+
+    <td>4</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="BIANCHI SAMANTHA"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="852.9"               // punteggio
+    data-tempo="02:36:36"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>BIANCHI SAMANTHA</td>
+
+    <td>1981</td>
+
+    <td>200stile</td>
+
+    <td>02:36:36</td>
+
+    <td>852.9</td>
+
+    <td>3</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="BIANCHI SAMANTHA"                     // atleta
+    data-gara="1500stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="899.0"               // punteggio
+    data-tempo="20:27:27"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>BIANCHI SAMANTHA</td>
+
+    <td>1981</td>
+
+    <td>1500stile</td>
+
+    <td>20:27:27</td>
+
+    <td>899.0</td>
+
+    <td>2</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CALO' MANUEL"                     // atleta
+    data-gara="50farfalla"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="637.2"               // punteggio
+    data-tempo="00:37:37"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>CALO' MANUEL</td>
+
+    <td>1994</td>
+
+    <td>50farfalla</td>
+
+    <td>00:37:37</td>
+
+    <td>637.2</td>
+
+    <td>8</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CALO' MANUEL"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="697.4"               // punteggio
+    data-tempo="02:42:42"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>CALO' MANUEL</td>
+
+    <td>1994</td>
+
+    <td>200stile</td>
+
+    <td>02:42:42</td>
+
+    <td>697.4</td>
+
+    <td>2</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CALO' MANUEL"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="746.3"               // punteggio
+    data-tempo="00:30:30"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>CALO' MANUEL</td>
+
+    <td>1994</td>
+
+    <td>50stile</td>
+
+    <td>00:30:30</td>
+
+    <td>746.3</td>
+
+    <td>7</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CANNONE GABRIELE"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="767.3"               // punteggio
+    data-tempo="02:24:24"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>CANNONE GABRIELE</td>
+
+    <td>2002</td>
+
+    <td>200stile</td>
+
+    <td>02:24:24</td>
+
+    <td>767.3</td>
+
+    <td>3</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CANNONE GABRIELE"                     // atleta
+    data-gara="200misti"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="805.6"               // punteggio
+    data-tempo="02:34:34"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>CANNONE GABRIELE</td>
+
+    <td>2002</td>
+
+    <td>200misti</td>
+
+    <td>02:34:34</td>
+
+    <td>805.6</td>
+
+    <td>3</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CAVALIERI MASSIMO"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="862.2"               // punteggio
+    data-tempo="00:31:31"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>CAVALIERI MASSIMO</td>
+
+    <td>1961</td>
+
+    <td>50stile</td>
+
+    <td>00:31:31</td>
+
+    <td>862.2</td>
+
+    <td>1</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CERONE MARZIA"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="857.2"               // punteggio
+    data-tempo="05:11:11"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>CERONE MARZIA</td>
+
+    <td>1994</td>
+
+    <td>400stile</td>
+
+    <td>05:11:11</td>
+
+    <td>857.2</td>
+
+    <td>1</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CERONE MARZIA"                     // atleta
+    data-gara="100dorso"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="871.7"               // punteggio
+    data-tempo="01:14:14"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>CERONE MARZIA</td>
+
+    <td>1994</td>
+
+    <td>100dorso</td>
+
+    <td>01:14:14</td>
+
+    <td>871.7</td>
+
+    <td>1</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CERONE MARZIA"                     // atleta
+    data-gara="800stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="891.4"               // punteggio
+    data-tempo="10:21:21"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>CERONE MARZIA</td>
+
+    <td>1994</td>
+
+    <td>800stile</td>
+
+    <td>10:21:21</td>
+
+    <td>891.4</td>
+
+    <td>6</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CERONE MARZIA"                     // atleta
+    data-gara="1500stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="900.6"               // punteggio
+    data-tempo="19:40:40"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>CERONE MARZIA</td>
+
+    <td>1994</td>
+
+    <td>1500stile</td>
+
+    <td>19:40:40</td>
+
+    <td>900.6</td>
+
+    <td>3</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CIPRI FABIOLA"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="845.7"               // punteggio
+    data-tempo="05:04:04"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>CIPRI FABIOLA</td>
+
+    <td>2004</td>
+
+    <td>400stile</td>
+
+    <td>05:04:04</td>
+
+    <td>845.7</td>
+
+    <td>2</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CIPRI FABIOLA"                     // atleta
+    data-gara="100dorso"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="845.9"               // punteggio
+    data-tempo="01:15:15"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>CIPRI FABIOLA</td>
+
+    <td>2004</td>
+
+    <td>100dorso</td>
+
+    <td>01:15:15</td>
+
+    <td>845.9</td>
+
+    <td>2</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DE ANNA LIVIA"                     // atleta
+    data-gara="50farfalla"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="518.4"               // punteggio
+    data-tempo="01:11:11"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>DE ANNA LIVIA</td>
+
+    <td>1956</td>
+
+    <td>50farfalla</td>
+
+    <td>01:11:11</td>
+
+    <td>518.4</td>
+
+    <td>4</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DE ANNA LIVIA"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="670.9"               // punteggio
+    data-tempo="00:49:49"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>DE ANNA LIVIA</td>
+
+    <td>1956</td>
+
+    <td>50stile</td>
+
+    <td>00:49:49</td>
+
+    <td>670.9</td>
+
+    <td>8</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DE ANNA LIVIA"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="689.5"               // punteggio
+    data-tempo="00:47:47"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>DE ANNA LIVIA</td>
+
+    <td>1956</td>
+
+    <td>50stile</td>
+
+    <td>00:47:47</td>
+
+    <td>689.5</td>
+
+    <td>2</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DE ANNA LIVIA"                     // atleta
+    data-gara="100dorso"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="695.9"               // punteggio
+    data-tempo="02:06:06"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>DE ANNA LIVIA</td>
+
+    <td>1956</td>
+
+    <td>100dorso</td>
+
+    <td>02:06:06</td>
+
+    <td>695.9</td>
+
+    <td>1</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DE ANNA LIVIA"                     // atleta
+    data-gara="100dorso"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="699.6"               // punteggio
+    data-tempo="02:05:05"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>DE ANNA LIVIA</td>
+
+    <td>1956</td>
+
+    <td>100dorso</td>
+
+    <td>02:05:05</td>
+
+    <td>699.6</td>
+
+    <td>4</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DE NISCO ARIANNA"                     // atleta
+    data-gara="50farfalla"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="809.4"               // punteggio
+    data-tempo="00:33:33"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>DE NISCO ARIANNA</td>
+
+    <td>2003</td>
+
+    <td>50farfalla</td>
+
+    <td>00:33:33</td>
+
+    <td>809.4</td>
+
+    <td>19</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DE NISCO ARIANNA"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="838.7"               // punteggio
+    data-tempo="00:30:30"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>DE NISCO ARIANNA</td>
+
+    <td>2003</td>
+
+    <td>50stile</td>
+
+    <td>00:30:30</td>
+
+    <td>838.7</td>
+
+    <td>31</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DI CIOMMO GIULIA"                     // atleta
+    data-gara="50farfalla"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="848.2"               // punteggio
+    data-tempo="00:31:31"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>DI CIOMMO GIULIA</td>
+
+    <td>2006</td>
+
+    <td>50farfalla</td>
+
+    <td>00:31:31</td>
+
+    <td>848.2</td>
+
+    <td>9</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DI CIOMMO GIULIA"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="878.2"               // punteggio
+    data-tempo="00:29:29"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>DI CIOMMO GIULIA</td>
+
+    <td>2006</td>
+
+    <td>50stile</td>
+
+    <td>00:29:29</td>
+
+    <td>878.2</td>
+
+    <td>9</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DI CIOMMO GIULIA"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="880.0"               // punteggio
+    data-tempo="01:04:04"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>DI CIOMMO GIULIA</td>
+
+    <td>2006</td>
+
+    <td>100stile</td>
+
+    <td>01:04:04</td>
+
+    <td>880.0</td>
+
+    <td>13</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DI MEZZA ALESSANDRO"                     // atleta
+    data-gara="50farfalla"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="787.9"               // punteggio
+    data-tempo="00:34:34"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>DI MEZZA ALESSANDRO</td>
+
+    <td>1971</td>
+
+    <td>50farfalla</td>
+
+    <td>00:34:34</td>
+
+    <td>787.9</td>
+
+    <td>27</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DRUDI METALLI GIORGIA"                     // atleta
+    data-gara="200farfalla"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="704.6"               // punteggio
+    data-tempo="03:20:20"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>DRUDI METALLI GIORGIA</td>
+
+    <td>1996</td>
+
+    <td>200farfalla</td>
+
+    <td>03:20:20</td>
+
+    <td>704.6</td>
+
+    <td>5</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DRUDI METALLI GIORGIA"                     // atleta
+    data-gara="200misti"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="781.6"               // punteggio
+    data-tempo="03:02:02"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>DRUDI METALLI GIORGIA</td>
+
+    <td>1996</td>
+
+    <td>200misti</td>
+
+    <td>03:02:02</td>
+
+    <td>781.6</td>
+
+    <td>4</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DRUDI METALLI GIORGIA"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="800.6"               // punteggio
+    data-tempo="05:33:33"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>DRUDI METALLI GIORGIA</td>
+
+    <td>1996</td>
+
+    <td>400stile</td>
+
+    <td>05:33:33</td>
+
+    <td>800.6</td>
+
+    <td>9</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DRUDI METALLI GIORGIA"                     // atleta
+    data-gara="800stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="806.4"               // punteggio
+    data-tempo="11:27:27"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>DRUDI METALLI GIORGIA</td>
+
+    <td>1996</td>
+
+    <td>800stile</td>
+
+    <td>11:27:27</td>
+
+    <td>806.4</td>
+
+    <td>11</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DRUDI METALLI GIORGIA"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="811.6"               // punteggio
+    data-tempo="05:28:28"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>DRUDI METALLI GIORGIA</td>
+
+    <td>1996</td>
+
+    <td>400stile</td>
+
+    <td>05:28:28</td>
+
+    <td>811.6</td>
+
+    <td>2</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="FABI FRANCESCA"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="643.4"               // punteggio
+    data-tempo="03:14:14"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>FABI FRANCESCA</td>
+
+    <td>2000</td>
+
+    <td>200stile</td>
+
+    <td>03:14:14</td>
+
+    <td>643.4</td>
+
+    <td>3</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="FABI FRANCESCA"                     // atleta
+    data-gara="50dorso"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="663.2"               // punteggio
+    data-tempo="00:44:44"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>FABI FRANCESCA</td>
+
+    <td>2000</td>
+
+    <td>50dorso</td>
+
+    <td>00:44:44</td>
+
+    <td>663.2</td>
+
+    <td>2</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="FABI FRANCESCA"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="714.7"               // punteggio
+    data-tempo="00:36:36"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>FABI FRANCESCA</td>
+
+    <td>2000</td>
+
+    <td>50stile</td>
+
+    <td>00:36:36</td>
+
+    <td>714.7</td>
+
+    <td>10</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GONZINI BEATRICE"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="864.0"               // punteggio
+    data-tempo="00:29:29"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>GONZINI BEATRICE</td>
+
+    <td>2003</td>
+
+    <td>50stile</td>
+
+    <td>00:29:29</td>
+
+    <td>864.0</td>
+
+    <td>16</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GONZINI BEATRICE"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="894.2"               // punteggio
+    data-tempo="01:03:03"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>GONZINI BEATRICE</td>
+
+    <td>2003</td>
+
+    <td>100stile</td>
+
+    <td>01:03:03</td>
+
+    <td>894.2</td>
+
+    <td>9</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GRAZIOSI SOFIA"                     // atleta
+    data-gara="100dorso"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="873.8"               // punteggio
+    data-tempo="01:12:12"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>GRAZIOSI SOFIA</td>
+
+    <td>2005</td>
+
+    <td>100dorso</td>
+
+    <td>01:12:12</td>
+
+    <td>873.8</td>
+
+    <td>10</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GRAZIOSI SOFIA"                     // atleta
+    data-gara="50dorso"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="889.6"               // punteggio
+    data-tempo="00:32:32"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>GRAZIOSI SOFIA</td>
+
+    <td>2005</td>
+
+    <td>50dorso</td>
+
+    <td>00:32:32</td>
+
+    <td>889.6</td>
+
+    <td>6</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GUARRACINO MAURIZIO"                     // atleta
+    data-gara="50farfalla"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="584.3"               // punteggio
+    data-tempo="00:48:48"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>GUARRACINO MAURIZIO</td>
+
+    <td>1962</td>
+
+    <td>50farfalla</td>
+
+    <td>00:48:48</td>
+
+    <td>584.3</td>
+
+    <td>8</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GUARRACINO MAURIZIO"                     // atleta
+    data-gara="400misti"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="655.5"               // punteggio
+    data-tempo="08:20:20"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>GUARRACINO MAURIZIO</td>
+
+    <td>1962</td>
+
+    <td>400misti</td>
+
+    <td>08:20:20</td>
+
+    <td>655.5</td>
+
+    <td>6</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GUARRACINO MAURIZIO"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="748.4"               // punteggio
+    data-tempo="06:12:12"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>GUARRACINO MAURIZIO</td>
+
+    <td>1962</td>
+
+    <td>400stile</td>
+
+    <td>06:12:12</td>
+
+    <td>748.4</td>
+
+    <td>13</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GUARRACINO MAURIZIO"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="753.3"               // punteggio
+    data-tempo="02:53:53"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>GUARRACINO MAURIZIO</td>
+
+    <td>1962</td>
+
+    <td>200stile</td>
+
+    <td>02:53:53</td>
+
+    <td>753.3</td>
+
+    <td>4</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GUARRACINO MAURIZIO"                     // atleta
+    data-gara="1500stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="774.3"               // punteggio
+    data-tempo="24:05:05"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>GUARRACINO MAURIZIO</td>
+
+    <td>1962</td>
+
+    <td>1500stile</td>
+
+    <td>24:05:05</td>
+
+    <td>774.3</td>
+
+    <td>12</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GUIDI LICIA"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="826.0"               // punteggio
+    data-tempo="00:33:33"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>GUIDI LICIA</td>
+
+    <td>1974</td>
+
+    <td>50stile</td>
+
+    <td>00:33:33</td>
+
+    <td>826.0</td>
+
+    <td>4</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GUIDI LICIA"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="833.3"               // punteggio
+    data-tempo="02:43:43"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>GUIDI LICIA</td>
+
+    <td>1974</td>
+
+    <td>200stile</td>
+
+    <td>02:43:43</td>
+
+    <td>833.3</td>
+
+    <td>2</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GUIDI LICIA"                     // atleta
+    data-gara="800stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="857.4"               // punteggio
+    data-tempo="11:26:26"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>GUIDI LICIA</td>
+
+    <td>1974</td>
+
+    <td>800stile</td>
+
+    <td>11:26:26</td>
+
+    <td>857.4</td>
+
+    <td>6</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GUIDI LICIA"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="868.1"               // punteggio
+    data-tempo="02:36:36"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>GUIDI LICIA</td>
+
+    <td>1974</td>
+
+    <td>200stile</td>
+
+    <td>02:36:36</td>
+
+    <td>868.1</td>
+
+    <td>5</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GUIDI LICIA"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="868.8"               // punteggio
+    data-tempo="05:27:27"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>GUIDI LICIA</td>
+
+    <td>1974</td>
+
+    <td>400stile</td>
+
+    <td>05:27:27</td>
+
+    <td>868.8</td>
+
+    <td>4</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="LAURETI LAURA"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="514.0"               // punteggio
+    data-tempo="00:59:59"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>LAURETI LAURA</td>
+
+    <td>1960</td>
+
+    <td>50stile</td>
+
+    <td>00:59:59</td>
+
+    <td>514.0</td>
+
+    <td>18</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="MAIO STEFANO"                     // atleta
+    data-gara="50farfalla"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="709.7"               // punteggio
+    data-tempo="00:35:35"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>MAIO STEFANO</td>
+
+    <td>1981</td>
+
+    <td>50farfalla</td>
+
+    <td>00:35:35</td>
+
+    <td>709.7</td>
+
+    <td>4</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="MAIO STEFANO"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="814.7"               // punteggio
+    data-tempo="00:29:29"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>MAIO STEFANO</td>
+
+    <td>1981</td>
+
+    <td>50stile</td>
+
+    <td>00:29:29</td>
+
+    <td>814.7</td>
+
+    <td>5</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="MARIANI FLAVIO"                     // atleta
+    data-gara="100rana"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="885.4"               // punteggio
+    data-tempo="01:11:11"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>MARIANI FLAVIO</td>
+
+    <td>1992</td>
+
+    <td>100rana</td>
+
+    <td>01:11:11</td>
+
+    <td>885.4</td>
+
+    <td>2</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="MARIANI FLAVIO"                     // atleta
+    data-gara="50rana"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="886.9"               // punteggio
+    data-tempo="00:31:31"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>MARIANI FLAVIO</td>
+
+    <td>1992</td>
+
+    <td>50rana</td>
+
+    <td>00:31:31</td>
+
+    <td>886.9</td>
+
+    <td>13</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="MARIANI FLAVIO"                     // atleta
+    data-gara="100rana"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="898.6"               // punteggio
+    data-tempo="01:10:10"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>MARIANI FLAVIO</td>
+
+    <td>1992</td>
+
+    <td>100rana</td>
+
+    <td>01:10:10</td>
+
+    <td>898.6</td>
+
+    <td>7</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="MARIANI FLAVIO"                     // atleta
+    data-gara="200rana"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="907.7"               // punteggio
+    data-tempo="02:33:33"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>MARIANI FLAVIO</td>
+
+    <td>1992</td>
+
+    <td>200rana</td>
+
+    <td>02:33:33</td>
+
+    <td>907.7</td>
+
+    <td>3</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="MARTINAZZOLI LORENZO"                     // atleta
+    data-gara="100rana"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="837.2"               // punteggio
+    data-tempo="01:13:13"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>MARTINAZZOLI LORENZO</td>
+
+    <td>1998</td>
+
+    <td>100rana</td>
+
+    <td>01:13:13</td>
+
+    <td>837.2</td>
+
+    <td>24</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="MASSARO SERENELLA"                     // atleta
+    data-gara="200misti"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="782.8"               // punteggio
+    data-tempo="03:49:49"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>MASSARO SERENELLA</td>
+
+    <td>1960</td>
+
+    <td>200misti</td>
+
+    <td>03:49:49</td>
+
+    <td>782.8</td>
+
+    <td>1</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="MASSARO SERENELLA"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="805.3"               // punteggio
+    data-tempo="06:46:46"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>MASSARO SERENELLA</td>
+
+    <td>1960</td>
+
+    <td>400stile</td>
+
+    <td>06:46:46</td>
+
+    <td>805.3</td>
+
+    <td>1</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="MEDICI AURORA"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="878.7"               // punteggio
+    data-tempo="04:53:53"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>MEDICI AURORA</td>
+
+    <td>2002</td>
+
+    <td>400stile</td>
+
+    <td>04:53:53</td>
+
+    <td>878.7</td>
+
+    <td>1</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="MEDICI AURORA"                     // atleta
+    data-gara="200misti"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="895.6"               // punteggio
+    data-tempo="02:36:36"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>MEDICI AURORA</td>
+
+    <td>2002</td>
+
+    <td>200misti</td>
+
+    <td>02:36:36</td>
+
+    <td>895.6</td>
+
+    <td>1</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="MORICI MELANIA"                     // atleta
+    data-gara="100dorso"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="913.5"               // punteggio
+    data-tempo="01:11:11"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>MORICI MELANIA</td>
+
+    <td>1996</td>
+
+    <td>100dorso</td>
+
+    <td>01:11:11</td>
+
+    <td>913.5</td>
+
+    <td>1</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="MORICI MELANIA"                     // atleta
+    data-gara="50dorso"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="916.5"               // punteggio
+    data-tempo="00:32:32"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>MORICI MELANIA</td>
+
+    <td>1996</td>
+
+    <td>50dorso</td>
+
+    <td>00:32:32</td>
+
+    <td>916.5</td>
+
+    <td>1</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="MOSETTI MAURO"                     // atleta
+    data-gara="100rana"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="776.7"               // punteggio
+    data-tempo="01:35:35"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>MOSETTI MAURO</td>
+
+    <td>1963</td>
+
+    <td>100rana</td>
+
+    <td>01:35:35</td>
+
+    <td>776.7</td>
+
+    <td>3</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="MOSETTI MAURO"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="777.0"               // punteggio
+    data-tempo="01:15:15"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>MOSETTI MAURO</td>
+
+    <td>1963</td>
+
+    <td>100stile</td>
+
+    <td>01:15:15</td>
+
+    <td>777.0</td>
+
+    <td>7</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="MOSETTI MAURO"                     // atleta
+    data-gara="50rana"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="781.8"               // punteggio
+    data-tempo="00:41:41"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>MOSETTI MAURO</td>
+
+    <td>1963</td>
+
+    <td>50rana</td>
+
+    <td>00:41:41</td>
+
+    <td>781.8</td>
+
+    <td>4</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="OZDEMIR YAPRAK"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="827.0"               // punteggio
+    data-tempo="05:11:11"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>OZDEMIR YAPRAK</td>
+
+    <td>2005</td>
+
+    <td>400stile</td>
+
+    <td>05:11:11</td>
+
+    <td>827.0</td>
+
+    <td>6</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="OZDEMIR YAPRAK"                     // atleta
+    data-gara="200farfalla"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="843.5"               // punteggio
+    data-tempo="02:41:41"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>OZDEMIR YAPRAK</td>
+
+    <td>2005</td>
+
+    <td>200farfalla</td>
+
+    <td>02:41:41</td>
+
+    <td>843.5</td>
+
+    <td>3</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="OZDEMIR YAPRAK"                     // atleta
+    data-gara="100farfalla"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="859.1"               // punteggio
+    data-tempo="01:10:10"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>OZDEMIR YAPRAK</td>
+
+    <td>2005</td>
+
+    <td>100farfalla</td>
+
+    <td>01:10:10</td>
+
+    <td>859.1</td>
+
+    <td>6</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="PETTINATO GABRIELE"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="807.6"               // punteggio
+    data-tempo="00:28:28"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>PETTINATO GABRIELE</td>
+
+    <td>2000</td>
+
+    <td>50stile</td>
+
+    <td>00:28:28</td>
+
+    <td>807.6</td>
+
+    <td>31</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="PIOZZI MATTEO"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="794.8"               // punteggio
+    data-tempo="01:03:03"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>PIOZZI MATTEO</td>
+
+    <td>2003</td>
+
+    <td>100stile</td>
+
+    <td>01:03:03</td>
+
+    <td>794.8</td>
+
+    <td>9</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="PIOZZI MATTEO"                     // atleta
+    data-gara="50rana"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="809.7"               // punteggio
+    data-tempo="00:33:33"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>PIOZZI MATTEO</td>
+
+    <td>2003</td>
+
+    <td>50rana</td>
+
+    <td>00:33:33</td>
+
+    <td>809.7</td>
+
+    <td>2</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="PIOZZI MATTEO"                     // atleta
+    data-gara="50farfalla"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="822.8"               // punteggio
+    data-tempo="00:28:28"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>PIOZZI MATTEO</td>
+
+    <td>2003</td>
+
+    <td>50farfalla</td>
+
+    <td>00:28:28</td>
+
+    <td>822.8</td>
+
+    <td>5</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="PRIMERANO ALESSANDRA"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="827.2"               // punteggio
+    data-tempo="05:11:11"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>PRIMERANO ALESSANDRA</td>
+
+    <td>2006</td>
+
+    <td>400stile</td>
+
+    <td>05:11:11</td>
+
+    <td>827.2</td>
+
+    <td>5</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="PRIMERANO ALESSANDRA"                     // atleta
+    data-gara="50rana"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="856.0"               // punteggio
+    data-tempo="00:37:37"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>PRIMERANO ALESSANDRA</td>
+
+    <td>2006</td>
+
+    <td>50rana</td>
+
+    <td>00:37:37</td>
+
+    <td>856.0</td>
+
+    <td>10</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="PRIMERANO ELISA"                     // atleta
+    data-gara="200rana"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="859.5"               // punteggio
+    data-tempo="02:59:59"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>PRIMERANO ELISA</td>
+
+    <td>2004</td>
+
+    <td>200rana</td>
+
+    <td>02:59:59</td>
+
+    <td>859.5</td>
+
+    <td>6</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="PRIMERANO ELISA"                     // atleta
+    data-gara="50rana"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="866.5"               // punteggio
+    data-tempo="00:37:37"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>PRIMERANO ELISA</td>
+
+    <td>2004</td>
+
+    <td>50rana</td>
+
+    <td>00:37:37</td>
+
+    <td>866.5</td>
+
+    <td>8</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="PRIMERANO ELISA"                     // atleta
+    data-gara="100rana"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="873.4"               // punteggio
+    data-tempo="01:21:21"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>PRIMERANO ELISA</td>
+
+    <td>2004</td>
+
+    <td>100rana</td>
+
+    <td>01:21:21</td>
+
+    <td>873.4</td>
+
+    <td>7</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="RICCIONI VALERIO"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="741.8"               // punteggio
+    data-tempo="05:42:42"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>RICCIONI VALERIO</td>
+
+    <td>1981</td>
+
+    <td>400stile</td>
+
+    <td>05:42:42</td>
+
+    <td>741.8</td>
+
+    <td>4</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="RICCIONI VALERIO"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="752.3"               // punteggio
+    data-tempo="01:11:11"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>RICCIONI VALERIO</td>
+
+    <td>1981</td>
+
+    <td>100stile</td>
+
+    <td>01:11:11</td>
+
+    <td>752.3</td>
+
+    <td>4</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="RICCIONI VALERIO"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="757.9"               // punteggio
+    data-tempo="05:35:35"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>RICCIONI VALERIO</td>
+
+    <td>1981</td>
+
+    <td>400stile</td>
+
+    <td>05:35:35</td>
+
+    <td>757.9</td>
+
+    <td>13</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="RICCIONI VALERIO"                     // atleta
+    data-gara="800stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="768.1"               // punteggio
+    data-tempo="11:33:33"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>RICCIONI VALERIO</td>
+
+    <td>1981</td>
+
+    <td>800stile</td>
+
+    <td>11:33:33</td>
+
+    <td>768.1</td>
+
+    <td>9</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="RIDOLFI MAURIZIO"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="865.9"               // punteggio
+    data-tempo="01:05:05"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>RIDOLFI MAURIZIO</td>
+
+    <td>1967</td>
+
+    <td>100stile</td>
+
+    <td>01:05:05</td>
+
+    <td>865.9</td>
+
+    <td>10</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="RIDOLFI MAURIZIO"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="867.3"               // punteggio
+    data-tempo="02:24:24"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>RIDOLFI MAURIZIO</td>
+
+    <td>1967</td>
+
+    <td>200stile</td>
+
+    <td>02:24:24</td>
+
+    <td>867.3</td>
+
+    <td>7</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSATO PAOLO"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="663.8"               // punteggio
+    data-tempo="06:19:19"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ROSATO PAOLO</td>
+
+    <td>1982</td>
+
+    <td>400stile</td>
+
+    <td>06:19:19</td>
+
+    <td>663.8</td>
+
+    <td>7</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSATO PAOLO"                     // atleta
+    data-gara="800stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="672.0"               // punteggio
+    data-tempo="13:00:00"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ROSATO PAOLO</td>
+
+    <td>1982</td>
+
+    <td>800stile</td>
+
+    <td>13:00:00</td>
+
+    <td>672.0</td>
+
+    <td>24</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSATO PAOLO"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="679.0"               // punteggio
+    data-tempo="02:52:52"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ROSATO PAOLO</td>
+
+    <td>1982</td>
+
+    <td>200stile</td>
+
+    <td>02:52:52</td>
+
+    <td>679.0</td>
+
+    <td>8</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSATO PAOLO"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="689.1"               // punteggio
+    data-tempo="06:05:05"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ROSATO PAOLO</td>
+
+    <td>1982</td>
+
+    <td>400stile</td>
+
+    <td>06:05:05</td>
+
+    <td>689.1</td>
+
+    <td>21</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSATO PAOLO"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="743.4"               // punteggio
+    data-tempo="01:10:10"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ROSATO PAOLO</td>
+
+    <td>1982</td>
+
+    <td>100stile</td>
+
+    <td>01:10:10</td>
+
+    <td>743.4</td>
+
+    <td>59</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO DANIELE"                     // atleta
+    data-gara="100farfalla"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="854.2"               // punteggio
+    data-tempo="01:03:03"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ROSSETTO DANIELE</td>
+
+    <td>1998</td>
+
+    <td>100farfalla</td>
+
+    <td>01:03:03</td>
+
+    <td>854.2</td>
+
+    <td>16</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO DANIELE"                     // atleta
+    data-gara="100farfalla"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="864.7"               // punteggio
+    data-tempo="01:02:02"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ROSSETTO DANIELE</td>
+
+    <td>1998</td>
+
+    <td>100farfalla</td>
+
+    <td>01:02:02</td>
+
+    <td>864.7</td>
+
+    <td>3</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO DANIELE"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="875.8"               // punteggio
+    data-tempo="02:08:08"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ROSSETTO DANIELE</td>
+
+    <td>1998</td>
+
+    <td>200stile</td>
+
+    <td>02:08:08</td>
+
+    <td>875.8</td>
+
+    <td>1</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO DANIELE"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="888.8"               // punteggio
+    data-tempo="04:33:33"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ROSSETTO DANIELE</td>
+
+    <td>1998</td>
+
+    <td>400stile</td>
+
+    <td>04:33:33</td>
+
+    <td>888.8</td>
+
+    <td>1</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO DANIELE"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="903.1"               // punteggio
+    data-tempo="04:29:29"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ROSSETTO DANIELE</td>
+
+    <td>1998</td>
+
+    <td>400stile</td>
+
+    <td>04:29:29</td>
+
+    <td>903.1</td>
+
+    <td>5</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO DANIELE"                     // atleta
+    data-gara="800stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="904.6"               // punteggio
+    data-tempo="09:23:23"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ROSSETTO DANIELE</td>
+
+    <td>1998</td>
+
+    <td>800stile</td>
+
+    <td>09:23:23</td>
+
+    <td>904.6</td>
+
+    <td>5</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO GABRIELE"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="794.2"               // punteggio
+    data-tempo="02:19:19"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ROSSETTO GABRIELE</td>
+
+    <td>2003</td>
+
+    <td>200stile</td>
+
+    <td>02:19:19</td>
+
+    <td>794.2</td>
+
+    <td>1</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO GABRIELE"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="804.4"               // punteggio
+    data-tempo="01:02:02"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ROSSETTO GABRIELE</td>
+
+    <td>2003</td>
+
+    <td>100stile</td>
+
+    <td>01:02:02</td>
+
+    <td>804.4</td>
+
+    <td>6</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO GABRIELE"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="827.3"               // punteggio
+    data-tempo="01:00:00"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ROSSETTO GABRIELE</td>
+
+    <td>2003</td>
+
+    <td>100stile</td>
+
+    <td>01:00:00</td>
+
+    <td>827.3</td>
+
+    <td>31</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO GABRIELE"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="829.4"               // punteggio
+    data-tempo="02:13:13"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ROSSETTO GABRIELE</td>
+
+    <td>2003</td>
+
+    <td>200stile</td>
+
+    <td>02:13:13</td>
+
+    <td>829.4</td>
+
+    <td>10</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO GABRIELE"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="843.4"               // punteggio
+    data-tempo="04:44:44"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ROSSETTO GABRIELE</td>
+
+    <td>2003</td>
+
+    <td>400stile</td>
+
+    <td>04:44:44</td>
+
+    <td>843.4</td>
+
+    <td>5</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="RUIU FRANCESCA DANIELA"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="830.4"               // punteggio
+    data-tempo="02:43:43"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>RUIU FRANCESCA DANIELA</td>
+
+    <td>1974</td>
+
+    <td>200stile</td>
+
+    <td>02:43:43</td>
+
+    <td>830.4</td>
+
+    <td>3</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="RUIU FRANCESCA DANIELA"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="841.4"               // punteggio
+    data-tempo="02:41:41"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>RUIU FRANCESCA DANIELA</td>
+
+    <td>1974</td>
+
+    <td>200stile</td>
+
+    <td>02:41:41</td>
+
+    <td>841.4</td>
+
+    <td>10</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="RUIU FRANCESCA DANIELA"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="878.7"               // punteggio
+    data-tempo="00:31:31"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>RUIU FRANCESCA DANIELA</td>
+
+    <td>1974</td>
+
+    <td>50stile</td>
+
+    <td>00:31:31</td>
+
+    <td>878.7</td>
+
+    <td>2</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="RUIU FRANCESCA DANIELA"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="879.4"               // punteggio
+    data-tempo="01:10:10"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>RUIU FRANCESCA DANIELA</td>
+
+    <td>1974</td>
+
+    <td>100stile</td>
+
+    <td>01:10:10</td>
+
+    <td>879.4</td>
+
+    <td>6</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="RUIU FRANCESCA DANIELA"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="882.6"               // punteggio
+    data-tempo="00:31:31"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>RUIU FRANCESCA DANIELA</td>
+
+    <td>1974</td>
+
+    <td>50stile</td>
+
+    <td>00:31:31</td>
+
+    <td>882.6</td>
+
+    <td>8</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="SANTICCHIA JHON JAIRO"                     // atleta
+    data-gara="100dorso"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="853.3"               // punteggio
+    data-tempo="01:06:06"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>SANTICCHIA JHON JAIRO</td>
+
+    <td>1992</td>
+
+    <td>100dorso</td>
+
+    <td>01:06:06</td>
+
+    <td>853.3</td>
+
+    <td>1</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="SANTICCHIA JHON JAIRO"                     // atleta
+    data-gara="50dorso"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="858.2"               // punteggio
+    data-tempo="00:30:30"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>SANTICCHIA JHON JAIRO</td>
+
+    <td>1992</td>
+
+    <td>50dorso</td>
+
+    <td>00:30:30</td>
+
+    <td>858.2</td>
+
+    <td>2</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="SANTICCHIA JHON JAIRO"                     // atleta
+    data-gara="200misti"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="873.5"               // punteggio
+    data-tempo="02:24:24"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>SANTICCHIA JHON JAIRO</td>
+
+    <td>1992</td>
+
+    <td>200misti</td>
+
+    <td>02:24:24</td>
+
+    <td>873.5</td>
+
+    <td>1</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="SPARAGNA LUCA"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="853.4"               // punteggio
+    data-tempo="02:27:27"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>SPARAGNA LUCA</td>
+
+    <td>1967</td>
+
+    <td>200stile</td>
+
+    <td>02:27:27</td>
+
+    <td>853.4</td>
+
+    <td>9</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="SPARAGNA LUCA"                     // atleta
+    data-gara="50farfalla"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="858.8"               // punteggio
+    data-tempo="00:31:31"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>SPARAGNA LUCA</td>
+
+    <td>1967</td>
+
+    <td>50farfalla</td>
+
+    <td>00:31:31</td>
+
+    <td>858.8</td>
+
+    <td>12</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="SPARAGNA LUCA"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="879.1"               // punteggio
+    data-tempo="01:04:04"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>SPARAGNA LUCA</td>
+
+    <td>1967</td>
+
+    <td>100stile</td>
+
+    <td>01:04:04</td>
+
+    <td>879.1</td>
+
+    <td>9</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="TORRONI GIOVANNI"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="733.6"               // punteggio
+    data-tempo="06:19:19"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>TORRONI GIOVANNI</td>
+
+    <td>1963</td>
+
+    <td>400stile</td>
+
+    <td>06:19:19</td>
+
+    <td>733.6</td>
+
+    <td>2</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="TORRONI GIOVANNI"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="742.6"               // punteggio
+    data-tempo="01:19:19"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>TORRONI GIOVANNI</td>
+
+    <td>1963</td>
+
+    <td>100stile</td>
+
+    <td>01:19:19</td>
+
+    <td>742.6</td>
+
+    <td>9</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="URZI' EMANUELE ORAZIO FERDINANDO"                     // atleta
+    data-gara="100dorso"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="598.9"               // punteggio
+    data-tempo="01:39:39"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>URZI' EMANUELE ORAZIO FERDINANDO</td>
+
+    <td>1985</td>
+
+    <td>100dorso</td>
+
+    <td>01:39:39</td>
+
+    <td>598.9</td>
+
+    <td>2</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="URZI' EMANUELE ORAZIO FERDINANDO"                     // atleta
+    data-gara="800stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="648.3"               // punteggio
+    data-tempo="13:28:28"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>URZI' EMANUELE ORAZIO FERDINANDO</td>
+
+    <td>1985</td>
+
+    <td>800stile</td>
+
+    <td>13:28:28</td>
+
+    <td>648.3</td>
+
+    <td>27</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="URZI' EMANUELE ORAZIO FERDINANDO"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="659.2"               // punteggio
+    data-tempo="02:57:57"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>URZI' EMANUELE ORAZIO FERDINANDO</td>
+
+    <td>1985</td>
+
+    <td>200stile</td>
+
+    <td>02:57:57</td>
+
+    <td>659.2</td>
+
+    <td>11</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="URZI' EMANUELE ORAZIO FERDINANDO"                     // atleta
+    data-gara="400stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="660.1"               // punteggio
+    data-tempo="06:21:21"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>URZI' EMANUELE ORAZIO FERDINANDO</td>
+
+    <td>1985</td>
+
+    <td>400stile</td>
+
+    <td>06:21:21</td>
+
+    <td>660.1</td>
+
+    <td>25</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="VERDECCHIA DAVIDE"                     // atleta
+    data-gara="800stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="849.0"               // punteggio
+    data-tempo="10:11:11"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>VERDECCHIA DAVIDE</td>
+
+    <td>1988</td>
+
+    <td>800stile</td>
+
+    <td>10:11:11</td>
+
+    <td>849.0</td>
+
+    <td>7</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="VERDECCHIA DAVIDE"                     // atleta
+    data-gara="200rana"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="890.8"               // punteggio
+    data-tempo="02:40:40"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>VERDECCHIA DAVIDE</td>
+
+    <td>1988</td>
+
+    <td>200rana</td>
+
+    <td>02:40:40</td>
+
+    <td>890.8</td>
+
+    <td>4</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="VERDECCHIA DAVIDE"                     // atleta
+    data-gara="100rana"                         // gara
+    data-manifestazione="10° Trofeo Nota chi Nuota"     // manifestazione
+    data-data="2026-05-10"                         // data manifestazione
+    data-punteggio="891.7"               // punteggio
+    data-tempo="01:11:11"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>VERDECCHIA DAVIDE</td>
+
+    <td>1988</td>
+
+    <td>100rana</td>
+
+    <td>01:11:11</td>
+
+    <td>891.7</td>
+
+    <td>1</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+</tr>
+
+
+<tr
+    data-atleta="VITALI LUCA"                     // atleta
+    data-gara="100dorso"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="780.7"               // punteggio
+    data-tempo="01:27:27"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>VITALI LUCA</td>
+
+    <td>1966</td>
+
+    <td>100dorso</td>
+
+    <td>01:27:27</td>
+
+    <td>780.7</td>
+
+    <td>11</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="VITALI LUCA"                     // atleta
+    data-gara="200stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="785.0"               // punteggio
+    data-tempo="02:46:46"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>VITALI LUCA</td>
+
+    <td>1966</td>
+
+    <td>200stile</td>
+
+    <td>02:46:46</td>
+
+    <td>785.0</td>
+
+    <td>22</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="VITALI LUCA"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="806.6"               // punteggio
+    data-tempo="01:12:12"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>VITALI LUCA</td>
+
+    <td>1966</td>
+
+    <td>100stile</td>
+
+    <td>01:12:12</td>
+
+    <td>806.6</td>
+
+    <td>26</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ZULLO CLAUDIO"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="C It Estivo"     // manifestazione
+    data-data="2026-06-29"                         // data manifestazione
+    data-punteggio="735.5"               // punteggio
+    data-tempo="00:31:31"                       //tempo
+    >                      
+    <td>M??</td>
+
+    <td>ZULLO CLAUDIO</td>
+
+    <td>1999</td>
+
+    <td>50stile</td>
+
+    <td>00:31:31</td>
+
+    <td>735.5</td>
+
+    <td>68</td>
+
+    <td>C It Estivo</td>
+
+    <td>2026-06-29</td>
+
+</tr>
+
+
+
+</tbody>
+
+</table>
+
+</body>
+
+</html>
+
