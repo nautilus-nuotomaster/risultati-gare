@@ -1,0 +1,1214 @@
+
+<!DOCTYPE html>
+
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">                     <!-- codifica UTF8 -->
+
+<title>RISGARE_2026</title>                     <!-- titolo della scheda browser -->
+
+</head>
+<script>
+
+function applicaFiltri() {
+   const atleta =                                                    // legge il testo atleta
+        document.getElementById('txtAtleta')
+        .value
+        .trim()
+        .toUpperCase();
+
+    const manifestazione =                                             // legge il testo manifestazione
+        document.getElementById('txtManifestazione')
+        .value
+        .trim()
+        .toUpperCase();
+
+    const righe =                                                     // recupera tutte le righe
+        document.querySelectorAll('#corpoTabella tr');
+
+    righe.forEach(
+        function(riga) {
+
+            const testoAtleta =
+    riga.dataset.atleta              // legge data-atleta
+        .trim()
+        .toUpperCase();
+
+            const testoManifestazione =
+    riga.dataset.manifestazione      // legge data-manifestazione
+        .trim()
+        .toUpperCase();
+
+            let visibile = true;                                      // inizialmente visibile
+
+            if (
+                atleta !== '' &&                                      // filtro atleta valorizzato
+                !testoAtleta.includes(atleta)                         // atleta non trovato
+            ) {
+                visibile = false;                                     // nasconde la riga
+            }
+
+            if (
+                manifestazione !== '' &&                              // filtro manifestazione valorizzato
+                !testoManifestazione.includes(manifestazione)         // manifestazione non trovata
+            ) {
+                visibile = false;                                     // nasconde la riga
+            }
+
+            riga.style.display =                                      // mostra o nasconde
+                visibile
+                    ? 'table-row'                                     // visualizza la riga
+                    : 'none';                                         // nasconde la riga
+
+        }
+    );
+
+
+}
+
+function ordinaTabella(campo) {                                        // ordina la tabella
+
+    const corpoTabella =
+        document.getElementById('corpoTabella');                       // tbody risultati
+
+    const righe =
+        Array.from(
+            corpoTabella.querySelectorAll('tr')
+        );                                                             // tutte le righe
+
+    righe.sort(
+        function(a, b) {
+
+            // ==========================================================
+            // ATLETA
+            // ==========================================================
+
+            if (campo === 'atleta') {
+
+                return a.dataset.atleta
+                    .localeCompare(
+                        b.dataset.atleta
+                    );
+
+            }
+
+            // ==========================================================
+            // GARA
+            // ==========================================================
+
+            if (campo === 'gara') {
+
+                return a.dataset.gara
+                    .localeCompare(
+                        b.dataset.gara
+                    );
+
+            }
+
+            // ==========================================================
+            // MANIFESTAZIONE
+            // prima data più recente
+            // poi nome manifestazione
+            // ==========================================================
+
+            if (campo === 'manifestazione') {
+
+                const dataA =
+                    new Date(a.dataset.data);                          // data riga A
+
+                const dataB =
+                    new Date(b.dataset.data);                          // data riga B
+
+                const confrontoDate =
+                    dataB - dataA;                                    // ordine decrescente
+
+                if (confrontoDate !== 0) {
+
+                    return confrontoDate;                             // prevale la data
+
+                }
+
+                return a.dataset.manifestazione
+                    .localeCompare(
+                        b.dataset.manifestazione
+                    );
+
+            }
+
+            // ==========================================================
+            // DATA
+            // ==========================================================
+
+            if (campo === 'data') {
+
+                return (
+                    new Date(b.dataset.data) -
+                    new Date(a.dataset.data)
+                );
+
+            }
+
+            // ==========================================================
+            // PUNTEGGIO
+            // ==========================================================
+
+            if (campo === 'punteggio') {
+
+                return (
+                    parseFloat(b.dataset.punteggio) -
+                    parseFloat(a.dataset.punteggio)
+                );
+
+            }
+
+            // ==========================================================
+            // TEMPO
+            // ==========================================================
+
+            if (campo === 'tempo') {
+
+                return a.dataset.tempo
+                    .localeCompare(
+                        b.dataset.tempo
+                    );
+
+            }
+
+            return 0;                                                 // criterio sconosciuto
+
+        }
+    );
+
+    righe.forEach(
+        function(riga) {
+
+            corpoTabella.appendChild(riga);                           // riscrive la riga ordinata
+
+        }
+    );
+
+}
+</script>
+<body>
+
+<!-- =============================================================== -->
+<!-- TITOLO PAGINA                                                   -->
+<!-- =============================================================== -->
+
+<!-- =============================================================== -->
+<!-- FILTRI GESTITI DALLA PAGINA PRINCIPALE DEL SITO                 -->
+<!-- =============================================================== -->
+
+<!-- =============================================================== -->
+<!-- TABELLA RISULTATI                                               -->
+<!-- =============================================================== -->
+
+<table id="tabellaRisultati" border="1"> <!-- tabella risultati -->
+
+<thead>
+
+<tr>
+
+    <th>Cat.</th>
+
+     <th onclick="ordinaTabella('atleta')" style="cursor:pointer">
+    Atleta ↕
+</th>
+
+    <th>Anno</th>
+
+<th onclick="ordinaTabella('gara')" style="cursor:pointer">
+    Gara ↕
+</th>
+
+<th onclick="ordinaTabella('tempo')" style="cursor:pointer">
+    Tempo ↕
+</th>
+
+<th onclick="ordinaTabella('punteggio')" style="cursor:pointer">
+    Punti ↕
+</th>
+ <th>Pos.</th>
+<th onclick="ordinaTabella('manifestazione')" style="cursor:pointer">
+    Manifestazione ↕
+</th>
+
+<th onclick="ordinaTabella('data')" style="cursor:pointer">
+    Data ↕
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="corpoTabella">
+
+
+<tr
+    data-atleta="ALABYAD JOSSEF"                     // atleta
+    data-gara="50farfalla"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="760.8"               // punteggio
+    data-tempo="00:30:30"                       //tempo
+    >                      
+    <td>M25</td>
+
+    <td>ALABYAD JOSSEF</td>
+
+    <td>1998</td>
+
+    <td>50farfalla</td>
+
+    <td>00:30:30</td>
+
+    <td>760.8</td>
+
+    <td>9</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CALVINO GIANLUCA"                     // atleta
+    data-gara="100dorso"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="526.0"               // punteggio
+    data-tempo="01:48:48"                       //tempo
+    >                      
+    <td>M40</td>
+
+    <td>CALVINO GIANLUCA</td>
+
+    <td>1984</td>
+
+    <td>100dorso</td>
+
+    <td>01:48:48</td>
+
+    <td>526.0</td>
+
+    <td>12</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CALVINO GIANLUCA"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="601.4"               // punteggio
+    data-tempo="00:37:37"                       //tempo
+    >                      
+    <td>M40</td>
+
+    <td>CALVINO GIANLUCA</td>
+
+    <td>1984</td>
+
+    <td>50stile</td>
+
+    <td>00:37:37</td>
+
+    <td>601.4</td>
+
+    <td>28</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CAVALLINI MICHELA"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="727.8"               // punteggio
+    data-tempo="00:34:34"                       //tempo
+    >                      
+    <td>M25</td>
+
+    <td>CAVALLINI MICHELA</td>
+
+    <td>2002</td>
+
+    <td>50stile</td>
+
+    <td>00:34:34</td>
+
+    <td>727.8</td>
+
+    <td>21</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CINTI SIMONE"                     // atleta
+    data-gara="100misti"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="706.7"               // punteggio
+    data-tempo="01:20:20"                       //tempo
+    >                      
+    <td>M40</td>
+
+    <td>CINTI SIMONE</td>
+
+    <td>1983</td>
+
+    <td>100misti</td>
+
+    <td>01:20:20</td>
+
+    <td>706.7</td>
+
+    <td>11</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="CINTI SIMONE"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="779.7"               // punteggio
+    data-tempo="00:29:29"                       //tempo
+    >                      
+    <td>M40</td>
+
+    <td>CINTI SIMONE</td>
+
+    <td>1983</td>
+
+    <td>50stile</td>
+
+    <td>00:29:29</td>
+
+    <td>779.7</td>
+
+    <td>8</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DE ANNA LIVIA"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="669.9"               // punteggio
+    data-tempo="00:49:49"                       //tempo
+    >                      
+    <td>M70</td>
+
+    <td>DE ANNA LIVIA</td>
+
+    <td>1956</td>
+
+    <td>50stile</td>
+
+    <td>00:49:49</td>
+
+    <td>669.9</td>
+
+    <td>2</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DE ANNA LIVIA"                     // atleta
+    data-gara="100dorso"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="675.3"               // punteggio
+    data-tempo="02:05:05"                       //tempo
+    >                      
+    <td>M70</td>
+
+    <td>DE ANNA LIVIA</td>
+
+    <td>1956</td>
+
+    <td>100dorso</td>
+
+    <td>02:05:05</td>
+
+    <td>675.3</td>
+
+    <td>1</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="DRUDI METALLI GIORGIA"                     // atleta
+    data-gara="100rana"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="783.5"               // punteggio
+    data-tempo="01:29:29"                       //tempo
+    >                      
+    <td>M30</td>
+
+    <td>DRUDI METALLI GIORGIA</td>
+
+    <td>1996</td>
+
+    <td>100rana</td>
+
+    <td>01:29:29</td>
+
+    <td>783.5</td>
+
+    <td>5</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="FABI FRANCESCA"                     // atleta
+    data-gara="50dorso"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="671.9"               // punteggio
+    data-tempo="00:42:42"                       //tempo
+    >                      
+    <td>M25</td>
+
+    <td>FABI FRANCESCA</td>
+
+    <td>2000</td>
+
+    <td>50dorso</td>
+
+    <td>00:42:42</td>
+
+    <td>671.9</td>
+
+    <td>4</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="FABI FRANCESCA"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="682.3"               // punteggio
+    data-tempo="00:36:36"                       //tempo
+    >                      
+    <td>M25</td>
+
+    <td>FABI FRANCESCA</td>
+
+    <td>2000</td>
+
+    <td>50stile</td>
+
+    <td>00:36:36</td>
+
+    <td>682.3</td>
+
+    <td>17</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GARCIA BARRACO MARIA ELISA"                     // atleta
+    data-gara="100dorso"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="638.6"               // punteggio
+    data-tempo="01:45:45"                       //tempo
+    >                      
+    <td>M50</td>
+
+    <td>GARCIA BARRACO MARIA ELISA</td>
+
+    <td>1973</td>
+
+    <td>100dorso</td>
+
+    <td>01:45:45</td>
+
+    <td>638.6</td>
+
+    <td>2</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GARCIA BARRACO MARIA ELISA"                     // atleta
+    data-gara="100rana"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="693.2"               // punteggio
+    data-tempo="01:50:50"                       //tempo
+    >                      
+    <td>M50</td>
+
+    <td>GARCIA BARRACO MARIA ELISA</td>
+
+    <td>1973</td>
+
+    <td>100rana</td>
+
+    <td>01:50:50</td>
+
+    <td>693.2</td>
+
+    <td>1</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GUARRACINO MAURIZIO"                     // atleta
+    data-gara="100misti"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="675.3"               // punteggio
+    data-tempo="01:37:37"                       //tempo
+    >                      
+    <td>M65</td>
+
+    <td>GUARRACINO MAURIZIO</td>
+
+    <td>1962</td>
+
+    <td>100misti</td>
+
+    <td>01:37:37</td>
+
+    <td>675.3</td>
+
+    <td>7</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GUIDI LICIA"                     // atleta
+    data-gara="50dorso"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="747.3"               // punteggio
+    data-tempo="00:42:42"                       //tempo
+    >                      
+    <td>M50</td>
+
+    <td>GUIDI LICIA</td>
+
+    <td>1974</td>
+
+    <td>50dorso</td>
+
+    <td>00:42:42</td>
+
+    <td>747.3</td>
+
+    <td>2</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="GUIDI LICIA"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="833.2"               // punteggio
+    data-tempo="01:12:12"                       //tempo
+    >                      
+    <td>M50</td>
+
+    <td>GUIDI LICIA</td>
+
+    <td>1974</td>
+
+    <td>100stile</td>
+
+    <td>01:12:12</td>
+
+    <td>833.2</td>
+
+    <td>1</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="LUCIANO LUDOVICA"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="675.8"               // punteggio
+    data-tempo="00:37:37"                       //tempo
+    >                      
+    <td>M25</td>
+
+    <td>LUCIANO LUDOVICA</td>
+
+    <td>2000</td>
+
+    <td>50stile</td>
+
+    <td>00:37:37</td>
+
+    <td>675.8</td>
+
+    <td>19</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSATO PAOLO"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="728.6"               // punteggio
+    data-tempo="00:31:31"                       //tempo
+    >                      
+    <td>M45</td>
+
+    <td>ROSATO PAOLO</td>
+
+    <td>1982</td>
+
+    <td>50stile</td>
+
+    <td>00:31:31</td>
+
+    <td>728.6</td>
+
+    <td>16</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO DANIELE"                     // atleta
+    data-gara="50farfalla"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="841.3"               // punteggio
+    data-tempo="00:27:27"                       //tempo
+    >                      
+    <td>M25</td>
+
+    <td>ROSSETTO DANIELE</td>
+
+    <td>1998</td>
+
+    <td>50farfalla</td>
+
+    <td>00:27:27</td>
+
+    <td>841.3</td>
+
+    <td>4</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO DANIELE"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="847.2"               // punteggio
+    data-tempo="00:57:57"                       //tempo
+    >                      
+    <td>M25</td>
+
+    <td>ROSSETTO DANIELE</td>
+
+    <td>1998</td>
+
+    <td>100stile</td>
+
+    <td>00:57:57</td>
+
+    <td>847.2</td>
+
+    <td>6</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO DANIELE"                     // atleta
+    data-gara="100farfalla"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="861.1"               // punteggio
+    data-tempo="01:01:01"                       //tempo
+    >                      
+    <td>M25</td>
+
+    <td>ROSSETTO DANIELE</td>
+
+    <td>1998</td>
+
+    <td>100farfalla</td>
+
+    <td>01:01:01</td>
+
+    <td>861.1</td>
+
+    <td>4</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO GABRIELE"                     // atleta
+    data-gara="50farfalla"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="742.4"               // punteggio
+    data-tempo="00:31:31"                       //tempo
+    >                      
+    <td>M20</td>
+
+    <td>ROSSETTO GABRIELE</td>
+
+    <td>2003</td>
+
+    <td>50farfalla</td>
+
+    <td>00:31:31</td>
+
+    <td>742.4</td>
+
+    <td>16</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO GABRIELE"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="784.1"               // punteggio
+    data-tempo="00:27:27"                       //tempo
+    >                      
+    <td>M20</td>
+
+    <td>ROSSETTO GABRIELE</td>
+
+    <td>2003</td>
+
+    <td>50stile</td>
+
+    <td>00:27:27</td>
+
+    <td>784.1</td>
+
+    <td>16</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ROSSETTO GABRIELE"                     // atleta
+    data-gara="100stile"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="789.2"               // punteggio
+    data-tempo="01:00:00"                       //tempo
+    >                      
+    <td>M20</td>
+
+    <td>ROSSETTO GABRIELE</td>
+
+    <td>2003</td>
+
+    <td>100stile</td>
+
+    <td>01:00:00</td>
+
+    <td>789.2</td>
+
+    <td>10</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="RUIU FRANCESCA DANIELA"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="857.5"               // punteggio
+    data-tempo="00:31:31"                       //tempo
+    >                      
+    <td>M50</td>
+
+    <td>RUIU FRANCESCA DANIELA</td>
+
+    <td>1974</td>
+
+    <td>50stile</td>
+
+    <td>00:31:31</td>
+
+    <td>857.5</td>
+
+    <td>3</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="SANTICCHIA JHON JAIRO"                     // atleta
+    data-gara="50dorso"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="820.1"               // punteggio
+    data-tempo="00:30:30"                       //tempo
+    >                      
+    <td>M35</td>
+
+    <td>SANTICCHIA JHON JAIRO</td>
+
+    <td>1992</td>
+
+    <td>50dorso</td>
+
+    <td>00:30:30</td>
+
+    <td>820.1</td>
+
+    <td>2</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="SANTICCHIA JHON JAIRO"                     // atleta
+    data-gara="100misti"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="839.8"               // punteggio
+    data-tempo="01:05:05"                       //tempo
+    >                      
+    <td>M35</td>
+
+    <td>SANTICCHIA JHON JAIRO</td>
+
+    <td>1992</td>
+
+    <td>100misti</td>
+
+    <td>01:05:05</td>
+
+    <td>839.8</td>
+
+    <td>2</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="SANTICCHIA JHON JAIRO"                     // atleta
+    data-gara="100dorso"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="841.9"               // punteggio
+    data-tempo="01:04:04"                       //tempo
+    >                      
+    <td>M35</td>
+
+    <td>SANTICCHIA JHON JAIRO</td>
+
+    <td>1992</td>
+
+    <td>100dorso</td>
+
+    <td>01:04:04</td>
+
+    <td>841.9</td>
+
+    <td>1</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="URZI' EMANUELE ORAZIO FERDINANDO"                     // atleta
+    data-gara="100dorso"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="600.9"               // punteggio
+    data-tempo="01:34:34"                       //tempo
+    >                      
+    <td>M40</td>
+
+    <td>URZI' EMANUELE ORAZIO FERDINANDO</td>
+
+    <td>1985</td>
+
+    <td>100dorso</td>
+
+    <td>01:34:34</td>
+
+    <td>600.9</td>
+
+    <td>11</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="URZI' EMANUELE ORAZIO FERDINANDO"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="679.7"               // punteggio
+    data-tempo="00:33:33"                       //tempo
+    >                      
+    <td>M40</td>
+
+    <td>URZI' EMANUELE ORAZIO FERDINANDO</td>
+
+    <td>1985</td>
+
+    <td>50stile</td>
+
+    <td>00:33:33</td>
+
+    <td>679.7</td>
+
+    <td>24</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="VITALI LUCA"                     // atleta
+    data-gara="100dorso"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="792.5"               // punteggio
+    data-tempo="01:23:23"                       //tempo
+    >                      
+    <td>M60</td>
+
+    <td>VITALI LUCA</td>
+
+    <td>1966</td>
+
+    <td>100dorso</td>
+
+    <td>01:23:23</td>
+
+    <td>792.5</td>
+
+    <td>3</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="VITALI LUCA"                     // atleta
+    data-gara="50stile"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="805.3"               // punteggio
+    data-tempo="00:31:31"                       //tempo
+    >                      
+    <td>M60</td>
+
+    <td>VITALI LUCA</td>
+
+    <td>1966</td>
+
+    <td>50stile</td>
+
+    <td>00:31:31</td>
+
+    <td>805.3</td>
+
+    <td>11</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+<tr
+    data-atleta="ZULLO CLAUDIO"                     // atleta
+    data-gara="50farfalla"                         // gara
+    data-manifestazione="5° Memorial Bud Spencer"     // manifestazione
+    data-data="2027-02-12"                         // data manifestazione
+    data-punteggio="699.7"               // punteggio
+    data-tempo="00:33:33"                       //tempo
+    >                      
+    <td>M25</td>
+
+    <td>ZULLO CLAUDIO</td>
+
+    <td>1999</td>
+
+    <td>50farfalla</td>
+
+    <td>00:33:33</td>
+
+    <td>699.7</td>
+
+    <td>12</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2027-02-12</td>
+
+</tr>
+
+
+
+</tbody>
+
+</table>
+
+</body>
+
+</html>
+
