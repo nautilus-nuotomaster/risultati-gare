@@ -1,0 +1,1818 @@
+
+<!DOCTYPE html>
+
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">                     <!-- codifica UTF8 -->
+
+<title>CLAMIGPUN_2025</title>                     <!-- titolo della scheda browser -->
+
+</head>
+<script>
+
+function applicaFiltri() {
+alert(
+        document.querySelectorAll(
+            '#corpoTabella tr'
+        ).length
+    );
+    const atleta = document
+        .getElementById('txtAtleta')
+        .value
+        .trim()
+        .toUpperCase(); // atleta digitato
+
+    const manifestazione = document
+        .getElementById('txtManifestazione')
+        .value
+        .trim()
+        .toUpperCase(); // manifestazione digitata
+
+    const righe = document.querySelectorAll(
+        '#corpoTabella tr'
+    ); // tutte le righe classifica
+
+    righe.forEach(
+
+        function(riga) {
+
+            const testoAtleta =
+
+                riga.cells[1]
+                    .innerText
+                    .trim()
+                    .toUpperCase();
+
+            const testoManifestazione =
+
+                riga.cells[7]
+                    .innerText
+                    .trim()
+                    .toUpperCase();
+
+            let visibile = true;
+
+            if (
+
+                atleta !== '' &&
+
+                !testoAtleta.includes(atleta)
+
+            ) {
+
+                visibile = false;
+
+            }
+
+            if (
+
+                manifestazione !== '' &&
+
+                !testoManifestazione.includes(
+                    manifestazione
+                )
+
+            ) {
+
+                visibile = false;
+
+            }
+
+            riga.style.display =
+
+                visibile
+                    ? ''
+                    : 'none';
+
+        }
+
+    );
+
+}
+
+</script>
+<body>
+
+<!-- =============================================================== -->
+<!-- TITOLO PAGINA                                                   -->
+<!-- =============================================================== -->
+
+<h1>
+
+RISULTATI GARE
+
+</h1>
+
+<hr>
+
+<!-- =============================================================== -->
+<!-- FILTRO ATLETA                                                   -->
+<!-- =============================================================== -->
+
+<h2>
+
+ATLETA
+
+</h2>
+
+<input
+    id="txtAtleta"
+    type="text"
+    placeholder="Scrivi atleta..."
+    list="listaAtleti"> <!-- collega il campo alla lista di suggerimenti -->
+
+<datalist id="listaAtleti"> <!-- elenco usato dall'autocompletamento -->
+
+    
+<option value="ABAGNALE MICHELE"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="AGRESTA CHIARA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="ALABYAD JOSSEF"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="ALBENZI EMANUELA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="ANDINI FEDERICA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="BALDAZZI VALERIO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="BENNANI TOMMASO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="BIANCHI SAMANTHA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="CALO' MANUEL"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="CALVINO GIANLUCA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="CANNONE GABRIELE"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="CAVALIERI MASSIMO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="CAVALLINI MICHELA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="CERONE MARZIA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="CINTI SIMONE"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="CIPRI FABIOLA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="COLELLA ROBERTO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="CORSINO ROBERT"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="D'URSI EUGENIO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="DE ANNA LIVIA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="DE NISCO ARIANNA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="DI CIOMMO GIULIA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="DI MEZZA ALESSANDRO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="DITTO MARIA ROSARIA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="DRUDI METALLI GIORGIA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="FABI FRANCESCA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="GARCIA BARRACO MARIA ELISA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="GRAZIOSI SOFIA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="GUARRACINO MAURIZIO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="GUIDI LICIA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="LUCIANO LUDOVICA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="MAIO STEFANO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="MARIANI FLAVIO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="MARTINAZZOLI LORENZO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="MARTINELLI NICOLAS"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="MASSARO SERENELLA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="MEDICI AURORA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="MORICI MELANIA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="MOSETTI MAURO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="OZDEMIR YAPRAK"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="PARETI CARLO ANDREA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="PASTORINI VINCENZO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="PATTUMELLI EMANUELA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="PETTINATO GABRIELE"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="PIOZZI MATTEO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="POMPILI CRISTIANO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="POZZI FEDERICA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="PRIMERANO ALESSANDRA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="PRIMERANO ELISA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="PROTOPAPA ENRICA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="RICCIONI VALERIO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="RIDOLFI MAURIZIO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="RIGIROZZO LUDOVICO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="ROSATO PAOLO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="ROSSETTO DANIELE"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="ROSSETTO GABRIELE"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="ROZZI FRANCESCO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="RUIU FRANCESCA DANIELA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="SANTICCHIA JHON JAIRO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="SERRA LORENZO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="SILVESTRELLI SERGIO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="SPARAGNA LUCA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="TORRONI GIOVANNI"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="URSINI FABIO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="URZI' EMANUELE ORAZIO FERDINANDO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="VENZA STEFANO"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="VERDECCHIA DAVIDE"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="VITALI LUCA"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="ZULLO CLAUDIO"></option>  // voce disponibile nell'autocompletamento
+
+
+
+</datalist>
+
+<hr>
+
+<!-- =============================================================== -->
+<!-- FILTRO MANIFESTAZIONE                                           -->
+<!-- =============================================================== -->
+
+<h2>
+
+MANIFESTAZIONE
+
+</h2>
+
+<input
+    id="txtManifestazione"
+    type="text"
+    placeholder="Scrivi manifestazione..."
+    list="listaManifestazioni"> <!-- collega il campo alla lista di suggerimenti -->
+
+<datalist id="listaManifestazioni"> <!-- elenco usato dall'autocompletamento -->
+
+    
+<option value="DS_Mrisgar800sl"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="17° Trofeo Nantes Ostiensis"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="11 Trofeo Master Aquaniene"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="Trofeo Master Flaminio"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="Manifestazione Estiva Piemonte"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="29° Trofeo Forum Sprint"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="5° Memorial Bud Spencer"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="Fin Plus"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="10° Trofeo Nota chi Nuota"></option>  // voce disponibile nell'autocompletamento
+
+
+<option value="Regionali Lazio"></option>  // voce disponibile nell'autocompletamento
+
+
+
+</datalist>
+
+<hr>
+
+<!-- =============================================================== -->
+<!-- TABELLA RISULTATI                                               -->
+<!-- =============================================================== -->
+
+<table id="tabellaClassifica" border="1"> <!-- tabella classifica -->
+
+<thead>
+
+<tr>
+
+    <th>Cat.</th>
+
+    <th>Atleta</th>
+
+    <th>Anno</th>
+
+    <th>Gara</th>
+
+    <th>Tempo</th>
+
+    <th>Punti</th>
+
+    <th>Pos.</th>
+
+    <th>Manifestazione</th>
+
+    <th>Data</th>
+
+</tr>
+
+</thead>
+
+<tbody id="corpoTabella">
+
+
+<tr data-atleta="ALBENZI EMANUELA" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>ALBENZI EMANUELA</td>
+
+
+    <td>974.9</td>
+
+    <td>100farfalla</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="BALDAZZI VALERIO" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>BALDAZZI VALERIO</td>
+
+
+    <td>925.5</td>
+
+    <td>100rana</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="ANDINI FEDERICA" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>ANDINI FEDERICA</td>
+
+
+    <td>925.0</td>
+
+    <td>100stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="MORICI MELANIA" data-manifestazione="Fin Plus"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>MORICI MELANIA</td>
+
+
+    <td>919.8</td>
+
+    <td>50dorso</td>
+
+    <td>Fin Plus</td>
+
+    <td>2026-04-11</td>
+
+   
+</tr>
+
+
+<tr data-atleta="MEDICI AURORA" data-manifestazione="17° Trofeo Nantes Ostiensis"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>MEDICI AURORA</td>
+
+
+    <td>906.0</td>
+
+    <td>200misti</td>
+
+    <td>17° Trofeo Nantes Ostiensis</td>
+
+    <td>2026-03-29</td>
+
+   
+</tr>
+
+
+<tr data-atleta="ROSSETTO DANIELE" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>ROSSETTO DANIELE</td>
+
+
+    <td>904.2</td>
+
+    <td>400stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="MARIANI FLAVIO" data-manifestazione="Trofeo Master Flaminio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>MARIANI FLAVIO</td>
+
+
+    <td>901.3</td>
+
+    <td>100rana</td>
+
+    <td>Trofeo Master Flaminio</td>
+
+    <td>2026-05-24</td>
+
+   
+</tr>
+
+
+<tr data-atleta="VERDECCHIA DAVIDE" data-manifestazione="17° Trofeo Nantes Ostiensis"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>VERDECCHIA DAVIDE</td>
+
+
+    <td>898.6</td>
+
+    <td>200rana</td>
+
+    <td>17° Trofeo Nantes Ostiensis</td>
+
+    <td>2026-03-29</td>
+
+   
+</tr>
+
+
+<tr data-atleta="CAVALIERI MASSIMO" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>CAVALIERI MASSIMO</td>
+
+
+    <td>890.0</td>
+
+    <td>50stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="BIANCHI SAMANTHA" data-manifestazione="DS_Mrisgar800sl"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>BIANCHI SAMANTHA</td>
+
+
+    <td>889.53</td>
+
+    <td>800stile</td>
+
+    <td>DS_Mrisgar800sl</td>
+
+    <td>2026-10-31</td>
+
+   
+</tr>
+
+
+<tr data-atleta="CERONE MARZIA" data-manifestazione="11 Trofeo Master Aquaniene"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>CERONE MARZIA</td>
+
+
+    <td>884.88</td>
+
+    <td>200stile</td>
+
+    <td>11 Trofeo Master Aquaniene</td>
+
+    <td>2026-04-25</td>
+
+   
+</tr>
+
+
+<tr data-atleta="RIDOLFI MAURIZIO" data-manifestazione="11 Trofeo Master Aquaniene"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>RIDOLFI MAURIZIO</td>
+
+
+    <td>883.54</td>
+
+    <td>200stile</td>
+
+    <td>11 Trofeo Master Aquaniene</td>
+
+    <td>2026-04-25</td>
+
+   
+</tr>
+
+
+<tr data-atleta="SANTICCHIA JHON JAIRO" data-manifestazione="Trofeo Master Flaminio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>SANTICCHIA JHON JAIRO</td>
+
+
+    <td>879.97</td>
+
+    <td>200misti</td>
+
+    <td>Trofeo Master Flaminio</td>
+
+    <td>2026-05-24</td>
+
+   
+</tr>
+
+
+<tr data-atleta="GRAZIOSI SOFIA" data-manifestazione="Trofeo Master Flaminio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>GRAZIOSI SOFIA</td>
+
+
+    <td>879.46</td>
+
+    <td>100dorso</td>
+
+    <td>Trofeo Master Flaminio</td>
+
+    <td>2026-05-24</td>
+
+   
+</tr>
+
+
+<tr data-atleta="RUIU FRANCESCA DANIELA" data-manifestazione="10° Trofeo Nota chi Nuota"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>RUIU FRANCESCA DANIELA</td>
+
+
+    <td>878.7</td>
+
+    <td>50stile</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+   
+</tr>
+
+
+<tr data-atleta="SPARAGNA LUCA" data-manifestazione="Trofeo Master Flaminio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>SPARAGNA LUCA</td>
+
+
+    <td>877.27</td>
+
+    <td>100stile</td>
+
+    <td>Trofeo Master Flaminio</td>
+
+    <td>2026-05-24</td>
+
+   
+</tr>
+
+
+<tr data-atleta="AGRESTA CHIARA" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>AGRESTA CHIARA</td>
+
+
+    <td>876.9</td>
+
+    <td>200stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="PRIMERANO ELISA" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>PRIMERANO ELISA</td>
+
+
+    <td>873.0</td>
+
+    <td>100rana</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="CIPRI FABIOLA" data-manifestazione="11 Trofeo Master Aquaniene"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>CIPRI FABIOLA</td>
+
+
+    <td>868.82</td>
+
+    <td>200dorso</td>
+
+    <td>11 Trofeo Master Aquaniene</td>
+
+    <td>2026-04-25</td>
+
+   
+</tr>
+
+
+<tr data-atleta="DI CIOMMO GIULIA" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>DI CIOMMO GIULIA</td>
+
+
+    <td>868.2</td>
+
+    <td>50stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="OZDEMIR YAPRAK" data-manifestazione="Trofeo Master Flaminio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>OZDEMIR YAPRAK</td>
+
+
+    <td>858.76</td>
+
+    <td>100farfalla</td>
+
+    <td>Trofeo Master Flaminio</td>
+
+    <td>2026-05-24</td>
+
+   
+</tr>
+
+
+<tr data-atleta="ROZZI FRANCESCO" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>ROZZI FRANCESCO</td>
+
+
+    <td>857.3</td>
+
+    <td>400stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="PASTORINI VINCENZO" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>PASTORINI VINCENZO</td>
+
+
+    <td>856.5</td>
+
+    <td>200stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="MARTINAZZOLI LORENZO" data-manifestazione="Trofeo Master Flaminio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>MARTINAZZOLI LORENZO</td>
+
+
+    <td>853.91</td>
+
+    <td>50farfalla</td>
+
+    <td>Trofeo Master Flaminio</td>
+
+    <td>2026-05-24</td>
+
+   
+</tr>
+
+
+<tr data-atleta="DRUDI METALLI GIORGIA" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>DRUDI METALLI GIORGIA</td>
+
+
+    <td>853.3</td>
+
+    <td>800stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="PIOZZI MATTEO" data-manifestazione="17° Trofeo Nantes Ostiensis"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>PIOZZI MATTEO</td>
+
+
+    <td>849.4</td>
+
+    <td>50rana</td>
+
+    <td>17° Trofeo Nantes Ostiensis</td>
+
+    <td>2026-03-29</td>
+
+   
+</tr>
+
+
+<tr data-atleta="PRIMERANO ALESSANDRA" data-manifestazione="Trofeo Master Flaminio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>PRIMERANO ALESSANDRA</td>
+
+
+    <td>848.12</td>
+
+    <td>50rana</td>
+
+    <td>Trofeo Master Flaminio</td>
+
+    <td>2026-05-24</td>
+
+   
+</tr>
+
+
+<tr data-atleta="POZZI FEDERICA" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>POZZI FEDERICA</td>
+
+
+    <td>846.8</td>
+
+    <td>100farfalla</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="D'URSI EUGENIO" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>D'URSI EUGENIO</td>
+
+
+    <td>844.0</td>
+
+    <td>200stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="MAIO STEFANO" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>MAIO STEFANO</td>
+
+
+    <td>842.4</td>
+
+    <td>50stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="GUIDI LICIA" data-manifestazione="17° Trofeo Nantes Ostiensis"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>GUIDI LICIA</td>
+
+
+    <td>839.2</td>
+
+    <td>200stile</td>
+
+    <td>17° Trofeo Nantes Ostiensis</td>
+
+    <td>2026-03-29</td>
+
+   
+</tr>
+
+
+<tr data-atleta="POMPILI CRISTIANO" data-manifestazione="Manifestazione Estiva Piemonte"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>POMPILI CRISTIANO</td>
+
+
+    <td>831.9</td>
+
+    <td>1500stile</td>
+
+    <td>Manifestazione Estiva Piemonte</td>
+
+    <td>2026-05-23</td>
+
+   
+</tr>
+
+
+<tr data-atleta="DE NISCO ARIANNA" data-manifestazione="Trofeo Master Flaminio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>DE NISCO ARIANNA</td>
+
+
+    <td>830.91</td>
+
+    <td>50stile</td>
+
+    <td>Trofeo Master Flaminio</td>
+
+    <td>2026-05-24</td>
+
+   
+</tr>
+
+
+<tr data-atleta="SILVESTRELLI SERGIO" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>SILVESTRELLI SERGIO</td>
+
+
+    <td>825.7</td>
+
+    <td>800stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="ROSSETTO GABRIELE" data-manifestazione="11 Trofeo Master Aquaniene"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>ROSSETTO GABRIELE</td>
+
+
+    <td>816.89</td>
+
+    <td>200stile</td>
+
+    <td>11 Trofeo Master Aquaniene</td>
+
+    <td>2026-04-25</td>
+
+   
+</tr>
+
+
+<tr data-atleta="MASSARO SERENELLA" data-manifestazione="Trofeo Master Flaminio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>MASSARO SERENELLA</td>
+
+
+    <td>814.72</td>
+
+    <td>400stile</td>
+
+    <td>Trofeo Master Flaminio</td>
+
+    <td>2026-05-24</td>
+
+   
+</tr>
+
+
+<tr data-atleta="ABAGNALE MICHELE" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>ABAGNALE MICHELE</td>
+
+
+    <td>814.0</td>
+
+    <td>1500stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="PARETI CARLO ANDREA" data-manifestazione="17° Trofeo Nantes Ostiensis"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>PARETI CARLO ANDREA</td>
+
+
+    <td>809.5</td>
+
+    <td>200rana</td>
+
+    <td>17° Trofeo Nantes Ostiensis</td>
+
+    <td>2026-03-29</td>
+
+   
+</tr>
+
+
+<tr data-atleta="SERRA LORENZO" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>SERRA LORENZO</td>
+
+
+    <td>808.7</td>
+
+    <td>100stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="CANNONE GABRIELE" data-manifestazione="10° Trofeo Nota chi Nuota"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>CANNONE GABRIELE</td>
+
+
+    <td>805.6</td>
+
+    <td>200misti</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+   
+</tr>
+
+
+<tr data-atleta="VITALI LUCA" data-manifestazione="5° Memorial Bud Spencer"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>VITALI LUCA</td>
+
+
+    <td>805.3</td>
+
+    <td>50stile</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2026-03-15</td>
+
+   
+</tr>
+
+
+<tr data-atleta="MARTINELLI NICOLAS" data-manifestazione="29° Trofeo Forum Sprint"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>MARTINELLI NICOLAS</td>
+
+
+    <td>799.5</td>
+
+    <td>50stile</td>
+
+    <td>29° Trofeo Forum Sprint</td>
+
+    <td>2026-01-18</td>
+
+   
+</tr>
+
+
+<tr data-atleta="VENZA STEFANO" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>VENZA STEFANO</td>
+
+
+    <td>799.4</td>
+
+    <td>200stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="MOSETTI MAURO" data-manifestazione="Trofeo Master Flaminio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>MOSETTI MAURO</td>
+
+
+    <td>798.32</td>
+
+    <td>200rana</td>
+
+    <td>Trofeo Master Flaminio</td>
+
+    <td>2026-05-24</td>
+
+   
+</tr>
+
+
+<tr data-atleta="DITTO MARIA ROSARIA" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>DITTO MARIA ROSARIA</td>
+
+
+    <td>794.6</td>
+
+    <td>400stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="GUARRACINO MAURIZIO" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>GUARRACINO MAURIZIO</td>
+
+
+    <td>786.0</td>
+
+    <td>1500stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="CINTI SIMONE" data-manifestazione="5° Memorial Bud Spencer"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>CINTI SIMONE</td>
+
+
+    <td>779.7</td>
+
+    <td>50stile</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2026-03-15</td>
+
+   
+</tr>
+
+
+<tr data-atleta="ALABYAD JOSSEF" data-manifestazione="Trofeo Master Flaminio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>ALABYAD JOSSEF</td>
+
+
+    <td>778.91</td>
+
+    <td>50stile</td>
+
+    <td>Trofeo Master Flaminio</td>
+
+    <td>2026-05-24</td>
+
+   
+</tr>
+
+
+<tr data-atleta="PETTINATO GABRIELE" data-manifestazione="29° Trofeo Forum Sprint"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>PETTINATO GABRIELE</td>
+
+
+    <td>776.8</td>
+
+    <td>50stile</td>
+
+    <td>29° Trofeo Forum Sprint</td>
+
+    <td>2026-01-18</td>
+
+   
+</tr>
+
+
+<tr data-atleta="RICCIONI VALERIO" data-manifestazione="Fin Plus"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>RICCIONI VALERIO</td>
+
+
+    <td>776.1</td>
+
+    <td>400stile</td>
+
+    <td>Fin Plus</td>
+
+    <td>2026-04-11</td>
+
+   
+</tr>
+
+
+<tr data-atleta="TORRONI GIOVANNI" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>TORRONI GIOVANNI</td>
+
+
+    <td>753.2</td>
+
+    <td>200stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="BENNANI TOMMASO" data-manifestazione="10° Trofeo Nota chi Nuota"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>BENNANI TOMMASO</td>
+
+
+    <td>750.7</td>
+
+    <td>50stile</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+   
+</tr>
+
+
+<tr data-atleta="CALO' MANUEL" data-manifestazione="Trofeo Master Flaminio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>CALO' MANUEL</td>
+
+
+    <td>747.05</td>
+
+    <td>50stile</td>
+
+    <td>Trofeo Master Flaminio</td>
+
+    <td>2026-05-24</td>
+
+   
+</tr>
+
+
+<tr data-atleta="ROSATO PAOLO" data-manifestazione="Trofeo Master Flaminio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>ROSATO PAOLO</td>
+
+
+    <td>746.73</td>
+
+    <td>50stile</td>
+
+    <td>Trofeo Master Flaminio</td>
+
+    <td>2026-05-24</td>
+
+   
+</tr>
+
+
+<tr data-atleta="RIGIROZZO LUDOVICO" data-manifestazione="5° Memorial Bud Spencer"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>RIGIROZZO LUDOVICO</td>
+
+
+    <td>743.2</td>
+
+    <td>50stile</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2026-03-15</td>
+
+   
+</tr>
+
+
+<tr data-atleta="CAVALLINI MICHELA" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>CAVALLINI MICHELA</td>
+
+
+    <td>734.9</td>
+
+    <td>50stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="ZULLO CLAUDIO" data-manifestazione="29° Trofeo Forum Sprint"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>ZULLO CLAUDIO</td>
+
+
+    <td>720.6</td>
+
+    <td>50stile</td>
+
+    <td>29° Trofeo Forum Sprint</td>
+
+    <td>2026-01-18</td>
+
+   
+</tr>
+
+
+<tr data-atleta="FABI FRANCESCA" data-manifestazione="10° Trofeo Nota chi Nuota"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>FABI FRANCESCA</td>
+
+
+    <td>714.7</td>
+
+    <td>50stile</td>
+
+    <td>10° Trofeo Nota chi Nuota</td>
+
+    <td>2026-05-10</td>
+
+   
+</tr>
+
+
+<tr data-atleta="COLELLA ROBERTO" data-manifestazione="29° Trofeo Forum Sprint"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>COLELLA ROBERTO</td>
+
+
+    <td>709.2</td>
+
+    <td>50rana</td>
+
+    <td>29° Trofeo Forum Sprint</td>
+
+    <td>2026-01-18</td>
+
+   
+</tr>
+
+
+<tr data-atleta="DE ANNA LIVIA" data-manifestazione="29° Trofeo Forum Sprint"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>DE ANNA LIVIA</td>
+
+
+    <td>707.5</td>
+
+    <td>50dorso</td>
+
+    <td>29° Trofeo Forum Sprint</td>
+
+    <td>2026-01-18</td>
+
+   
+</tr>
+
+
+<tr data-atleta="DI MEZZA ALESSANDRO" data-manifestazione="Fin Plus"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>DI MEZZA ALESSANDRO</td>
+
+
+    <td>706.9</td>
+
+    <td>100farfalla</td>
+
+    <td>Fin Plus</td>
+
+    <td>2026-04-11</td>
+
+   
+</tr>
+
+
+<tr data-atleta="CORSINO ROBERT" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>CORSINO ROBERT</td>
+
+
+    <td>696.8</td>
+
+    <td>800stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="URSINI FABIO" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>URSINI FABIO</td>
+
+
+    <td>694.4</td>
+
+    <td>1500stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="GARCIA BARRACO MARIA ELISA" data-manifestazione="5° Memorial Bud Spencer"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>GARCIA BARRACO MARIA ELISA</td>
+
+
+    <td>693.2</td>
+
+    <td>100rana</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2026-03-15</td>
+
+   
+</tr>
+
+
+<tr data-atleta="URZI' EMANUELE ORAZIO FERDINANDO" data-manifestazione="17° Trofeo Nantes Ostiensis"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>URZI' EMANUELE ORAZIO FERDINANDO</td>
+
+
+    <td>691.5</td>
+
+    <td>50stile</td>
+
+    <td>17° Trofeo Nantes Ostiensis</td>
+
+    <td>2026-03-29</td>
+
+   
+</tr>
+
+
+<tr data-atleta="PROTOPAPA ENRICA" data-manifestazione="Regionali Lazio"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>PROTOPAPA ENRICA</td>
+
+
+    <td>685.6</td>
+
+    <td>200stile</td>
+
+    <td>Regionali Lazio</td>
+
+    <td>2026-02-01</td>
+
+   
+</tr>
+
+
+<tr data-atleta="LUCIANO LUDOVICA" data-manifestazione="5° Memorial Bud Spencer"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>LUCIANO LUDOVICA</td>
+
+
+    <td>675.8</td>
+
+    <td>50stile</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2026-03-15</td>
+
+   
+</tr>
+
+
+<tr data-atleta="PATTUMELLI EMANUELA" data-manifestazione="5° Memorial Bud Spencer"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>PATTUMELLI EMANUELA</td>
+
+
+    <td>620.8</td>
+
+    <td>50stile</td>
+
+    <td>5° Memorial Bud Spencer</td>
+
+    <td>2026-03-15</td>
+
+   
+</tr>
+
+
+<tr data-atleta="CALVINO GIANLUCA" data-manifestazione="DS_Mrisgar800sl"> <!-- dati usati dal filtro Javascript -->
+    <td>0</td>
+
+    <td>0</td>
+
+    <td>CALVINO GIANLUCA</td>
+
+
+    <td>612.14</td>
+
+    <td>800stile</td>
+
+    <td>DS_Mrisgar800sl</td>
+
+    <td>2026-10-31</td>
+
+   
+</tr>
+
+
+
+</tbody>
+
+</table>
+
+</body>
+
+</html>
+
