@@ -161,9 +161,6 @@
 
 
         ];                                   // generato da NuotoMaster
-alert(
-    'TEST PUBBLICAZIONI'
-);
 
         const cmbStagione =
             document.getElementById('cmbStagione');             /* combo stagione */
@@ -193,15 +190,6 @@ alert(
 
             const stagione =
                 cmbStagione.value;
-alert(
-    'STAGIONE:',
-    stagione
-);
-
-alert(
-    'PUBBLICAZIONI FILTRATE:',
-    pubblicazioniStagione
-);
             const pubblicazione =
                 pubblicazioni.find(
                     p =>
@@ -210,10 +198,7 @@ alert(
                             stagione
                         )
                 );
-alert(
-    'pubblicazione trovata:',
-    pubblicazione
-);
+
 
             if (!pubblicazione) {
 
@@ -275,17 +260,7 @@ alert(
                             stagione
                         )
                 );
-alert(
-    p.codice,
-    stagione,
-    p.codice.endsWith(
-        stagione
-    )
-);
-alert(
-    'PUBBLICAZIONI FILTRATE:',
-    pubblicazioniStagione
-);
+
             pubblicazioniStagione.forEach(
                 p => {
 
