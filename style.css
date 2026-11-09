@@ -175,7 +175,7 @@ body {
 
     border-radius: 8px;
 
-    padding: 12px;
+    padding: 0;
 
 }
 
@@ -220,14 +220,13 @@ body {
 /*box che contiene tutto il menu */
 .filter-box {
 
-    background: #1e4fa8;       /* sfondo blu */
+    background: #1e4fa8;      /* sfondo blu */
 
-    color: white;              /* testo bianco */
+    color: white;             /* testo bianco */
 
-    border-radius: 20px;       /* arrotondamento */
+    border-radius: 20px;      /* angoli arrotondati */
 
-    padding: 20px;             /* bordo interno */
-
+    padding: 20px;            /* spazio interno */
 }
 
 .filter-box h3 {
