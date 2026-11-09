@@ -182,23 +182,18 @@ body {
 
 .menu-item {
 
-    padding: 12px;
-
-    margin-bottom: 10px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    font-size: 16px;
+  font-size: 14px;           /* più piccolo */
+    font-weight: normal;       /* non grassetto */
+    color: #dfe8ff;            /* meno acceso */
+    padding: 8px 12px;         /* meno spazio */
+    cursor: pointer;           /* mano sul click */
 
 }
 
 
 .menu-item:hover {
-
-    background: #2f65c8;
-
+  color: white;
+    background-color: rgba(255,255,255,0.10);
 }
 
 
@@ -218,13 +213,10 @@ body {
 /* ===================================================== */
 
 .filter-box {
-
-    background: #1e4fa8;
-
+font-size: 14px;           /* più piccolo */
+    font-weight: normal;       /* non grassetto */
+    padding: 8px 12px;         /* meno spazio */
     color: white;
-
-    border-radius: 8px;
-
     padding: 10px;
 
 }
