@@ -173,9 +173,9 @@ body {
 
     color: white;
 
-    border-radius: 15px;
+    border-radius: 8px;
 
-    padding: 15px;
+    padding: 8px;
 
 }
 
@@ -254,7 +254,7 @@ select {
 
     flex-direction: column;
 
-    gap: 14px;
+    gap: 8px;
 
 }
 
@@ -270,13 +270,13 @@ select {
 
 .season {
     color: #345bbf;
-    font-size: 18px;                    /* stagione */
+    font-size: 14px;                    /* stagione */
     margin-bottom: 3px;
 }
 
 .page-name {
     color: #ff7f22;
-    font-size: 18px;                    /* risultati gare */
+    font-size: 12px;                    /* risultati gare */
 }
 
 
@@ -321,6 +321,6 @@ select {
 
     border: none;                    /* elimina bordo standard */
 
-    font-size: 18px;                 /* dimensione testo */
+    font-size: 14px;                 /* dimensione testo */
 
 }
