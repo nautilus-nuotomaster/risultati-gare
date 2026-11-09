@@ -234,7 +234,7 @@ body {
 
     margin-bottom: 10px;
 
-    font-size: 18px;
+    font-size: 16px;
 
 }
 
@@ -278,13 +278,13 @@ select {
 
 .season {
     color: #345bbf;
-    font-size: 20px;                    /* stagione */
+    font-size: 18px;                    /* stagione */
     margin-bottom: 3px;
 }
 
 .page-name {
     color: #ff7f22;
-    font-size: 20px;                    /* risultati gare */
+    font-size: 18px;                    /* risultati gare */
 }
 
 
