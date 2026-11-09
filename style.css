@@ -140,7 +140,7 @@ body {
     display: grid;                      /* layout a griglia */
 
     grid-template-columns:
-        200px                           /* colonna destra */
+        180px                           /* colonna destra */
         1fr;                            /* contenuto */
 
     gap: 10px;                          /* spazio tra le colonne */
