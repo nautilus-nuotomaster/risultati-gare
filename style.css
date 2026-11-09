@@ -182,11 +182,17 @@ body {
 
 .menu-item {
 
-  font-size: 14px;           /* più piccolo */
-    font-weight: normal;       /* non grassetto */
-    color: #dfe8ff;            /* meno acceso */
-    padding: 8px 12px;         /* meno spazio */
-    cursor: pointer;           /* mano sul click */
+    font-size: 12px;
+
+    font-weight: normal;
+
+    color: #d9e2ff;
+
+    padding: 6px 10px;
+
+    margin-bottom: 6px;
+
+    cursor: pointer;
 
 }
 
