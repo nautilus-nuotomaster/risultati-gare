@@ -211,20 +211,26 @@ body {
 /* ===================================================== */
 /* FILTRI                                                */
 /* ===================================================== */
-
+/*box che contiene tutto il menu */
 .filter-box {
-font-size: 14px;           /* più piccolo */
-    font-weight: normal;       /* non grassetto */
-    padding: 8px 12px;         /* meno spazio */
-    color: blue;
-  
+
+    background: #1e4fa8;       /* sfondo blu */
+
+    color: white;              /* testo bianco */
+
+    border-radius: 20px;       /* arrotondamento */
+
+    padding: 20px;             /* bordo interno */
+
 }
 
 .filter-box h3 {
 
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
-    font-size: 14px;
+    font-size: 18px;
+
+    color: white;
 
 }
 
