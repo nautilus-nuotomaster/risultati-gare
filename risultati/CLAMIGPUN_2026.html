@@ -1,0 +1,710 @@
+
+            <!DOCTYPE html>
+
+            <html lang="it">
+
+            <head>
+
+                <meta charset="UTF-8"> <!-- codifica UTF8 -->
+
+                <title>CLAMIGPUN_2026</title> <!-- titolo della scheda browser -->
+
+            </head>
+            <script>
+
+                function applicaFiltri() {
+                    const atleta =                                                    // legge il testo atleta
+                        document.getElementById('txtAtleta')
+                            .value
+                            .trim()
+                            .toUpperCase();
+
+                    const manifestazione =                                             // legge il testo manifestazione
+                        document.getElementById('txtManifestazione')
+                            .value
+                            .trim()
+                            .toUpperCase();
+
+                    const righe =                                                     // recupera tutte le righe
+                        document.querySelectorAll('#corpoTabella tr');
+
+                    righe.forEach(
+                        function (riga) {
+
+                            const testoAtleta =
+                                riga.dataset.atleta              // legge data-atleta
+                                    .trim()
+                                    .toUpperCase();
+
+                            const testoManifestazione =
+                                riga.dataset.manifestazione      // legge data-manifestazione
+                                    .trim()
+                                    .toUpperCase();
+
+                            let visibile = true;                                      // inizialmente visibile
+
+                            if (
+                                atleta !== '' &&                                      // filtro atleta valorizzato
+                                !testoAtleta.includes(atleta)                         // atleta non trovato
+                            ) {
+                                visibile = false;                                     // nasconde la riga
+                            }
+
+                            if (
+                                manifestazione !== '' &&                              // filtro manifestazione valorizzato
+                                !testoManifestazione.includes(manifestazione)         // manifestazione non trovata
+                            ) {
+                                visibile = false;                                     // nasconde la riga
+                            }
+
+                            riga.style.display =                                      // mostra o nasconde
+                                visibile
+                                    ? 'table-row'                                     // visualizza la riga
+                                    : 'none';                                         // nasconde la riga
+
+                        }
+                    );
+
+
+                }
+
+                function ordinaTabella(campo) {                                        // ordina la tabella
+
+                    const corpoTabella =
+                        document.getElementById('corpoTabella');                       // tbody classifica
+
+                    const righe =
+                        Array.from(
+                            corpoTabella.querySelectorAll('tr')
+                        );                                                             // tutte le righe
+
+                    righe.sort(
+                        function (a, b) {
+
+                            // ==========================================================
+                            // ATLETA
+                            // ==========================================================
+
+                            if (campo === 'atleta') {
+
+                                return a.dataset.atleta
+                                    .localeCompare(
+                                        b.dataset.atleta
+                                    );
+
+                            }
+
+                            // ==========================================================
+                            // GARA
+                            // ==========================================================
+
+                            if (campo === 'gara') {
+
+                                return a.dataset.gara
+                                    .localeCompare(
+                                        b.dataset.gara
+                                    );
+
+                            }
+
+                            // ==========================================================
+                            // MANIFESTAZIONE
+                            // prima data più recente
+                            // poi nome manifestazione
+                            // ==========================================================
+
+                            if (campo === 'manifestazione') {
+
+                                const dataA =
+                                    new Date(a.dataset.data);                          // data riga A
+
+                                const dataB =
+                                    new Date(b.dataset.data);                          // data riga B
+
+                                const confrontoDate =
+                                    dataB - dataA;                                    // ordine decrescente
+
+                                if (confrontoDate !== 0) {
+
+                                    return confrontoDate;                             // prevale la data
+
+                                }
+
+                                return a.dataset.manifestazione
+                                    .localeCompare(
+                                        b.dataset.manifestazione
+                                    );
+
+                            }
+
+                            // ==========================================================
+                            // DATA
+                            // ==========================================================
+
+                            if (campo === 'data') {
+
+                                return (
+                                    new Date(b.dataset.data) -
+                                    new Date(a.dataset.data)
+                                );
+
+                            }
+
+                            // ==========================================================
+                            // PUNTEGGIO
+                            // ==========================================================
+
+                            if (campo === 'punteggio') {
+
+                                return (
+                                    parseFloat(b.dataset.punteggio) -
+                                    parseFloat(a.dataset.punteggio)
+                                );
+
+                            }
+
+                            // ==========================================================
+                            // TEMPO
+                            // ==========================================================
+
+                            if (campo === 'tempo') {
+
+                                return a.dataset.tempo
+                                    .localeCompare(
+                                        b.dataset.tempo
+                                    );
+
+                            }
+
+                            return 0;                                                 // criterio sconosciuto
+
+                        }
+                    );
+
+                    righe.forEach(
+                        function (riga) {
+
+                            corpoTabella.appendChild(riga);                           // riscrive la riga ordinata
+
+                        }
+                    );
+
+                }
+            </script>
+
+            <body>
+
+                <!-- =============================================================== -->
+                <!-- TITOLO PAGINA                                                   -->
+                <!-- =============================================================== -->
+
+                <!-- =============================================================== -->
+                <!-- FILTRI GESTITI DALLA PAGINA PRINCIPALE DEL SITO                 -->
+                <!-- =============================================================== -->
+
+                <!-- =============================================================== -->
+                <!-- TABELLA CLASSIFICA                                               -->
+                <!-- =============================================================== -->
+
+                <table id="tabellaClassifica" border="1"> <!-- tabella classifica -->
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Att.</th>
+                            <th>Pre.</th>
+
+                            <th onclick="ordinaTabella('atleta')" style="cursor:pointer">
+                                Atleta ↕
+                            </th>
+
+                            <th onclick="ordinaTabella('gara')" style="cursor:pointer">
+                                Gara ↕
+                            </th>
+
+                            <th onclick="ordinaTabella('punteggio')" style="cursor:pointer">
+                                Punteggio ↕
+                            </th>
+
+                            <th onclick="ordinaTabella('manifestazione')" style="cursor:pointer">
+                                Manifestazione ↕
+                            </th>
+
+                            <th onclick="ordinaTabella('data')" style="cursor:pointer">
+                                Data ↕
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="corpoTabella">
+
+                        
+            <tr data-Att.="0" data-Pre.="0" data-atleta="BIANCHI SAMANTHA" // atleta
+                data-gara="1500stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="896.3" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>BIANCHI SAMANTHA</td>
+                <td>1500stile</td>
+
+
+                <td>896.3</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="RIDOLFI MAURIZIO" // atleta
+                data-gara="1500stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="891.5" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>RIDOLFI MAURIZIO</td>
+                <td>1500stile</td>
+
+
+                <td>891.5</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="ROSSETTO DANIELE" // atleta
+                data-gara="800stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="889.1" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>ROSSETTO DANIELE</td>
+                <td>800stile</td>
+
+
+                <td>889.1</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="MEDICI AURORA" // atleta
+                data-gara="800stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="865.1" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>MEDICI AURORA</td>
+                <td>800stile</td>
+
+
+                <td>865.1</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="CERONE MARZIA" // atleta
+                data-gara="800stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="861.1" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>CERONE MARZIA</td>
+                <td>800stile</td>
+
+
+                <td>861.1</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="CIPRI FABIOLA" // atleta
+                data-gara="1500stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="857.0" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>CIPRI FABIOLA</td>
+                <td>1500stile</td>
+
+
+                <td>857.0</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="MASSARO SERENELLA" // atleta
+                data-gara="1500stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="834.3" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>MASSARO SERENELLA</td>
+                <td>1500stile</td>
+
+
+                <td>834.3</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="D'URSI EUGENIO" // atleta
+                data-gara="1500stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="834.0" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>D'URSI EUGENIO</td>
+                <td>1500stile</td>
+
+
+                <td>834.0</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="AGRESTA CHIARA" // atleta
+                data-gara="1500stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="832.5" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>AGRESTA CHIARA</td>
+                <td>1500stile</td>
+
+
+                <td>832.5</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="ANDINI FEDERICA" // atleta
+                data-gara="1500stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="820.4" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>ANDINI FEDERICA</td>
+                <td>1500stile</td>
+
+
+                <td>820.4</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="POMPILI CRISTIANO" // atleta
+                data-gara="1500stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="818.1" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>POMPILI CRISTIANO</td>
+                <td>1500stile</td>
+
+
+                <td>818.1</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="SILVESTRELLI SERGIO" // atleta
+                data-gara="800stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="808.3" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>SILVESTRELLI SERGIO</td>
+                <td>800stile</td>
+
+
+                <td>808.3</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="SANTICCHIA JHON JAIRO" // atleta
+                data-gara="800stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="807.2" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>SANTICCHIA JHON JAIRO</td>
+                <td>800stile</td>
+
+
+                <td>807.2</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="GUARRACINO MAURIZIO" // atleta
+                data-gara="1500stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="800.2" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>GUARRACINO MAURIZIO</td>
+                <td>1500stile</td>
+
+
+                <td>800.2</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="ABAGNALE MICHELE" // atleta
+                data-gara="1500stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="792.3" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>ABAGNALE MICHELE</td>
+                <td>1500stile</td>
+
+
+                <td>792.3</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="DITTO MARIA ROSARIA" // atleta
+                data-gara="800stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="776.1" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>DITTO MARIA ROSARIA</td>
+                <td>800stile</td>
+
+
+                <td>776.1</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="VITALI LUCA" // atleta
+                data-gara="1500stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="758.7" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>VITALI LUCA</td>
+                <td>1500stile</td>
+
+
+                <td>758.7</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="MOSETTI MAURO" // atleta
+                data-gara="800stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="730.0" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>MOSETTI MAURO</td>
+                <td>800stile</td>
+
+
+                <td>730.0</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="TORRONI GIOVANNI" // atleta
+                data-gara="800stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="715.4" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>TORRONI GIOVANNI</td>
+                <td>800stile</td>
+
+
+                <td>715.4</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="CALO' MANUEL" // atleta
+                data-gara="1500stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="681.7" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>CALO' MANUEL</td>
+                <td>1500stile</td>
+
+
+                <td>681.7</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="FABI FRANCESCA" // atleta
+                data-gara="1500stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="665.7" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>FABI FRANCESCA</td>
+                <td>1500stile</td>
+
+
+                <td>665.7</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="URSINI FABIO" // atleta
+                data-gara="800stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="653.9" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>URSINI FABIO</td>
+                <td>800stile</td>
+
+
+                <td>653.9</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="URZI' EMANUELE ORAZIO FERDINANDO" // atleta
+                data-gara="800stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="634.9" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>URZI' EMANUELE ORAZIO FERDINANDO</td>
+                <td>800stile</td>
+
+
+                <td>634.9</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+            <tr data-Att.="0" data-Pre.="0" data-atleta="CALVINO GIANLUCA" // atleta
+                data-gara="800stile" // gara data-manifestazione="Distanze speciali Lazio" // manifestazione
+                data-data="2026-10-31" // data manifestazione data-punteggio="612.2" // punteggio>
+
+                <td>0</td>
+                <td>0</td>
+                <td>CALVINO GIANLUCA</td>
+                <td>800stile</td>
+
+
+                <td>612.2</td>
+
+                <td>Distanze speciali Lazio</td>
+
+                <td>2026-10-31</td>
+
+            </tr>
+
+            
+
+                    </tbody>
+
+                </table>
+
+            </body>
+
+            </html>
+
+            
