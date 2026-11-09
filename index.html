@@ -74,47 +74,17 @@
                 <!-- MENU                                              -->
                 <!-- ================================================= -->
 
-                <div class="menu"> <!-- INIZIO MENU -->
-
-                    <div class="menu-item active"> <!-- INIZIO MENU-ITEM -->
-
-                        <a href="risultati/RISGARE_2026.html">Risultati gare</a>
-
-                    </div> <!-- FINE MENU-ITEM -->
-
-                    <div class="menu-item"> <!-- INIZIO MENU-ITEM -->
-
-                        Classifica Iron
-
-                    </div> <!-- FINE MENU-ITEM -->
-
-                    <div class="menu-item"> <!-- INIZIO MENU-ITEM -->
-
-                        Miglior punteggio
-
-                    </div> <!-- FINE MENU-ITEM -->
-
-                    <div class="menu-item"> <!-- INIZIO MENU-ITEM -->
-
-                        Regolamento Iron
-
-                    </div> <!-- FINE MENU-ITEM -->
+                <div class="menu" id="menuDinamico">
 
                 </div> <!-- FINE MENU -->
 
                 <h3>FILTRA PER</h3> <!-- titolo filtri -->
 
-                <input
-    id="txtAtleta"
-    type="text"
-    placeholder="Scrivi atleta..."
-    oninput="applicaFiltri()">                    <!-- filtro atleta -->
+                <input id="txtAtleta" type="text" placeholder="Scrivi atleta..." oninput="applicaFiltri()">
+                <!-- filtro atleta -->
 
-<input
-    id="txtManifestazione"
-    type="text"
-    placeholder="Scrivi manifestazione..."
-    oninput="applicaFiltri()">                    <!-- filtro manifestazione -->
+                <input id="txtManifestazione" type="text" placeholder="Scrivi manifestazione..."
+                    oninput="applicaFiltri()"> <!-- filtro manifestazione -->
 
             </div> <!-- FINE FILTER-BOX -->
 
@@ -149,16 +119,7 @@
             <!-- AREA CONTENUTI                                            -->
             <!-- ========================================================= -->
 
-            <div class="page-title"> <!-- INIZIO PAGE-TITLE -->
-
-                <div id="titoloStagione" class="season"> <!-- INIZIO SEASON -->
-                </div> <!-- FINE SEASON -->
-
-                <div id="titoloStampa" class="page-name"> <!-- INIZIO PAGE-NAME -->
-                </div> <!-- FINE PAGE-NAME -->
-
-            </div> <!-- FINE PAGE-TITLE -->
-
+           
             <div class="print-area"> <!-- INIZIO PRINT-AREA -->
 
                 <iframe id="contenutoStampa" style="width:100%; height:800px; border:none;">
@@ -177,7 +138,32 @@
 
     <script>                                                    /* INIZIO SCRIPT */
 
-        const stagioniDisponibili = [2026, 2025];               /* da generare automaticamente */
+        const stagioniDisponibili =
+            [2026,2025];                     // generato da NuotoMaster
+
+        const pubblicazioni = [
+
+            {
+  codice: "CLAMIGPUN_2025",          // es. RISGARE_2026
+  tipo: "MIGLIOR PUNTEGGIO",           // es. RISULTATI_GARE
+  titolo: "Classifica miglior punteggio 2025/2026"           // descrizione
+}
+,{
+  codice: "RISGARE_2025",          // es. RISGARE_2026
+  tipo: "RISULTATI GARE",           // es. RISULTATI_GARE
+  titolo: "Risultati Gare 2025/2026"           // descrizione
+}
+,{
+  codice: "RISGARE_2026",          // es. RISGARE_2026
+  tipo: "RISULTATI GARE",           // es. RISULTATI_GARE
+  titolo: "Risultati Gare 2026/2027"           // descrizione
+}
+
+
+        ];                                   // generato da NuotoMaster
+alert(
+    'TEST PUBBLICAZIONI'
+);
 
         const cmbStagione =
             document.getElementById('cmbStagione');             /* combo stagione */
@@ -196,90 +182,211 @@
 
         });
 
-        function aggiornaPagina() {                             /* aggiorna titoli e iframe */
+        let tipoCorrente =
+            'RISULTATI GARE';                 // stampa iniziale
+
+        function caricaPubblicazione(
+            tipo
+        ) {
+
+            tipoCorrente = tipo;              // memorizza stampa scelta
 
             const stagione =
-                parseInt(cmbStagione.value);                    /* stagione selezionata */
+                cmbStagione.value;
+alert(
+    'STAGIONE:',
+    stagione
+);
 
-            document.getElementById('titoloStagione').textContent =
+alert(
+    'PUBBLICAZIONI FILTRATE:',
+    pubblicazioniStagione
+);
+            const pubblicazione =
+                pubblicazioni.find(
+                    p =>
+                        p.tipo === tipo &&
+                        p.codice.endsWith(
+                            stagione
+                        )
+                );
+alert(
+    'pubblicazione trovata:',
+    pubblicazione
+);
+
+            if (!pubblicazione) {
+
+                document
+                    .getElementById(
+                        'contenutoStampa'
+                    )
+                    .src = '';
+
+                return;
+            }
+
+            document
+                .getElementById(
+                    'titoloStampa'
+                )
+                .textContent =
+                pubblicazione.titolo;
+
+            document
+                .getElementById(
+                    'titoloStagione'
+                )
+                .textContent =
                 'STAGIONE ' +
                 stagione +
                 '/' +
-                (stagione + 1);
+                (
+                    parseInt(
+                        stagione
+                    ) + 1
+                );
 
-            document.getElementById('titoloStampa').textContent =
-                'RISULTATI GARE';
-
-            document.getElementById('contenutoStampa').src =
-                'risultati/RISGARE_' +
-                stagione +
+            document
+                .getElementById(
+                    'contenutoStampa'
+                )
+                .src =
+                'risultati/' +
+                pubblicazione.codice +
                 '.html';
+        }
+        function generaMenu() {
 
+            const menu =
+                document.getElementById(
+                    'menuDinamico'
+                );
+
+            menu.innerHTML = '';
+
+            const stagione =
+                cmbStagione.value;
+
+            const pubblicazioniStagione =
+                pubblicazioni.filter(
+                    p =>
+                        p.codice.endsWith(
+                            stagione
+                        )
+                );
+alert(
+    p.codice,
+    stagione,
+    p.codice.endsWith(
+        stagione
+    )
+);
+alert(
+    'PUBBLICAZIONI FILTRATE:',
+    pubblicazioniStagione
+);
+            pubblicazioniStagione.forEach(
+                p => {
+
+                    const voce =
+                        document.createElement(
+                            'div'
+                        );
+
+                    voce.className =
+                        'menu-item';
+
+                    voce.textContent =
+                        p.tipo;
+
+                    voce.onclick =
+                        () =>
+                            caricaPubblicazione(
+                                p.tipo
+                            );
+
+                    menu.appendChild(
+                        voce
+                    );
+                }
+            );
         }
 
         cmbStagione.addEventListener(
             'change',
-            aggiornaPagina
-        );                                                     /* cambio stagione */
+            function () {
+
+                generaMenu();                 // rigenera il menu
+
+                caricaPubblicazione(
+                    tipoCorrente
+                );                            // mantiene la stampa corrente
+            }
+        );
 
         cmbStagione.value =
-            stagioniDisponibili[0];                            /* stagione più recente */
+            stagioniDisponibili[0];          // stagione più recente
 
-        aggiornaPagina();                                      /* caricamento iniziale */
-function applicaFiltri() {                                     // applica i filtri
+        generaMenu();                        // crea il menu
 
-    const atleta =
-        document.getElementById('txtAtleta')
-        .value
-        .trim()
-        .toUpperCase();                                        // atleta cercato
+        caricaPubblicazione(
+            'RISULTATI GARE'
+        );                                   // default all'apertura                                      /* caricamento iniziale */
+        function applicaFiltri() {                                     // applica i filtri
 
-    const manifestazione =
-        document.getElementById('txtManifestazione')
-        .value
-        .trim()
-        .toUpperCase();                                        // manifestazione cercata
+            const atleta =
+                document.getElementById('txtAtleta')
+                    .value
+                    .trim()
+                    .toUpperCase();                                        // atleta cercato
 
-    const iframe =
-        document.getElementById('contenutoStampa');            // iframe risultati
+            const manifestazione =
+                document.getElementById('txtManifestazione')
+                    .value
+                    .trim()
+                    .toUpperCase();                                        // manifestazione cercata
 
-    const righe =
-        iframe.contentWindow.document.querySelectorAll(
-            '#corpoTabella tr'
-        );                                                     // righe tabella
+            const iframe =
+                document.getElementById('contenutoStampa');            // iframe risultati
 
-    righe.forEach(riga => {
+            const righe =
+                iframe.contentWindow.document.querySelectorAll(
+                    '#corpoTabella tr'
+                );                                                     // righe tabella
 
-        const atletaRiga =
-            riga.dataset.atleta.toUpperCase();                 // atleta riga
+            righe.forEach(riga => {
 
-        const manifestazioneRiga =
-            riga.dataset.manifestazione.toUpperCase();         // manifestazione riga
+                const atletaRiga =
+                    riga.dataset.atleta.toUpperCase();                 // atleta riga
 
-        let visibile = true;                                   // inizialmente visibile
+                const manifestazioneRiga =
+                    riga.dataset.manifestazione.toUpperCase();         // manifestazione riga
 
-        if (
-            atleta !== '' &&
-            !atletaRiga.includes(atleta)
-        ) {
-            visibile = false;
+                let visibile = true;                                   // inizialmente visibile
+
+                if (
+                    atleta !== '' &&
+                    !atletaRiga.includes(atleta)
+                ) {
+                    visibile = false;
+                }
+
+                if (
+                    manifestazione !== '' &&
+                    !manifestazioneRiga.includes(manifestazione)
+                ) {
+                    visibile = false;
+                }
+
+                riga.style.display =
+                    visibile
+                        ? 'table-row'
+                        : 'none';
+
+            });
+
         }
-
-        if (
-            manifestazione !== '' &&
-            !manifestazioneRiga.includes(manifestazione)
-        ) {
-            visibile = false;
-        }
-
-        riga.style.display =
-            visibile
-                ? 'table-row'
-                : 'none';
-
-    });
-
-}
     </script> <!-- FINE SCRIPT -->
 
 </body> <!-- FINE BODY -->
