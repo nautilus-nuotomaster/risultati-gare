@@ -135,7 +135,7 @@ body {
 
 .container {
     display: grid;
-    grid-template-columns: 120px minmax(0, 1fr);
+    grid-template-columns: 180px minmax(0, 1fr);
     gap: 10px;
     width: 100%;
 }
@@ -219,7 +219,7 @@ body {
 
     border-radius: 20px;      /* angoli arrotondati */
 
-    padding: 20px;            /* spazio interno */
+    padding: 10px;            /* spazio interno */
 }
 
 .filter-box h3 {
