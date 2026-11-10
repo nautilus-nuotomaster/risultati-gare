@@ -44,7 +44,7 @@ body {
 
     grid-template-columns:
         100px                           /* colonna logo */
-        1fr                             /* colonna titolo */
+        5fr                             /* colonna titolo */
         120px;                          /* colonna foto */
 
     align-items: center;                /* centra verticalmente */
