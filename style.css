@@ -148,9 +148,9 @@ body {
 .sidebar {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 10px;
 
-    width: 180px;
+    width: 200px;
     min-width: 0;
     overflow: hidden;
 }
