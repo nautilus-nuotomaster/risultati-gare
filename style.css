@@ -43,7 +43,7 @@ body {
     display: grid;                      /* layout a griglia */
 
     grid-template-columns:
-        100px                           /* colonna logo */
+        80px                           /* colonna logo */
         5fr                             /* colonna titolo */
         120px;                          /* colonna foto */
 
