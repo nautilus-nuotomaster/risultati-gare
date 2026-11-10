@@ -21,12 +21,12 @@
     <!-- ========================================================= -->
 
     <div class="header"> <!-- INIZIO HEADER -->
+        <div class="pool-photo"> <!-- INIZIO POOL-PHOTO -->
 
-        <div class="logo"> <!-- INIZIO LOGO -->
+            <img src="img/piscina.png" alt="Piscina">
 
-            <img src="img/logo.png" alt="Logo Nautilus">
+        </div> <!-- FINE POOL-PHOTO -->
 
-        </div> <!-- FINE LOGO -->
 
         <div class="site-title"> <!-- INIZIO SITE-TITLE -->
 
@@ -35,12 +35,12 @@
             <p>Classifiche e risultati gare</p>
 
         </div> <!-- FINE SITE-TITLE -->
+        <div class="logo"> <!-- INIZIO LOGO -->
 
-        <div class="pool-photo"> <!-- INIZIO POOL-PHOTO -->
+            <img src="img/logo.png" alt="Logo Nautilus">
 
-            <img src="img/piscina.png" alt="Piscina">
+        </div> <!-- FINE LOGO -->
 
-        </div> <!-- FINE POOL-PHOTO -->
 
     </div> <!-- FINE HEADER -->
 
@@ -119,7 +119,7 @@
             <!-- AREA CONTENUTI                                            -->
             <!-- ========================================================= -->
 
-           
+
             <div class="print-area"> <!-- INIZIO PRINT-AREA -->
 
                 <iframe id="contenutoStampa" style="width:100%; height:800px; border:none;">
@@ -139,36 +139,11 @@
     <script>                                                    /* INIZIO SCRIPT */
 
         const stagioniDisponibili =
-            [2026,2025];                     // generato da NuotoMaster
+            __STAGIONI__;                     // generato da NuotoMaster
 
         const pubblicazioni = [
 
-            {
-  codice: "CLAMIGPUN_2025",          // es. RISGARE_2026
-  tipo: "MIGLIOR PUNTEGGIO",           // es. RISULTATI_GARE
-  titolo: "Classifica miglior punteggio 2025/2026"           // descrizione
-}
-,{
-  codice: "CLAMIGPUN_2026",          // es. RISGARE_2026
-  tipo: "MIGLIOR PUNTEGGIO",           // es. RISULTATI_GARE
-  titolo: "Classifica miglior punteggio 2026/2027"           // descrizione
-}
-,{
-  codice: "REGOIRO_2026",          // es. RISGARE_2026
-  tipo: "REGOLAMENTO IRON",           // es. RISULTATI_GARE
-  titolo: "REGOLAMENTO IRON 2026/2027"           // descrizione
-}
-,{
-  codice: "RISGARE_2025",          // es. RISGARE_2026
-  tipo: "RISULTATI GARE",           // es. RISULTATI_GARE
-  titolo: "Risultati Gare 2025/2026"           // descrizione
-}
-,{
-  codice: "RISGARE_2026",          // es. RISGARE_2026
-  tipo: "RISULTATI GARE",           // es. RISULTATI_GARE
-  titolo: "Risultati Gare 2026/2027"           // descrizione
-}
-
+            __PUBBLICAZIONI__
 
         ];                                   // generato da NuotoMaster
 
@@ -243,12 +218,12 @@
                 );
 
             document
-    .getElementById(
-        'contenutoStampa'
-    )
-    .src =
-    'risultati/' +
-    pubblicazione.nomeFile;
+                .getElementById(
+                    'contenutoStampa'
+                )
+                .src =
+                'risultati/' +
+                pubblicazione.nomeFile;
         }
         function generaMenu() {
 
