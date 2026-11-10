@@ -75,7 +75,7 @@ body {
 
 .logo img {
 
-    width: 60px;                       /* larghezza logo */
+    width: 70px;                       /* larghezza logo */
 
     height: auto;                       /* mantiene proporzioni */
 
@@ -95,7 +95,7 @@ body {
 
 .site-title h1 {
 
-    font-size: 20px;                    /* titolo principale */
+    font-size: 18px;                    /* titolo principale */
 
     margin-bottom: 5px;                 /* spazio sotto */
 
