@@ -61,26 +61,26 @@ body {
 
 }
 
-
 /* ===================================================== */
-/* LOGO                                                  */
+/* FOTO                                                  */
 /* ===================================================== */
 
-.logo {
+.pool-photo {
 
-    text-align: center;                 /* centra il logo */
+    text-align: center;                 /* centra la foto */
 
 }
 
 
-.logo img {
+.pool-photo img {
 
-    width: 70px;                       /* larghezza logo */
+    width: 130px;                       /* larghezza foto */
 
     height: auto;                       /* mantiene proporzioni */
 
-}
+    border-radius: 10px;                /* arrotondamento */
 
+}
 
 /* ===================================================== */
 /* TITOLO                                                */
@@ -108,27 +108,25 @@ body {
 
 }
 
-
 /* ===================================================== */
-/* FOTO                                                  */
+/* LOGO                                                  */
 /* ===================================================== */
 
-.pool-photo {
+.logo {
 
-    text-align: center;                 /* centra la foto */
+    text-align: center;                 /* centra il logo */
 
 }
 
 
-.pool-photo img {
+.logo img {
 
-    width: 130px;                       /* larghezza foto */
+    width: 70px;                       /* larghezza logo */
 
     height: auto;                       /* mantiene proporzioni */
 
-    border-radius: 10px;                /* arrotondamento */
-
 }
+
 
 
 /* ===================================================== */
