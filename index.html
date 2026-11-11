@@ -87,7 +87,11 @@
                     oninput="applicaFiltri()"> <!-- filtro manifestazione -->
 
             </div> <!-- FINE FILTER-BOX -->
+            <h3>LINK UTILI</h3> <!-- titolo sezione -->
 
+            <div class="menu" id="menuLinkUtili"> <!-- contenitore link -->
+
+            </div> <!-- fine link utili -->
         </div> <!-- FINE SIDEBAR -->
 
 
@@ -176,7 +180,41 @@
 
 
         ];                                   // generato da NuotoMaster
+        const linkUtili = [                     // link fissi del sito
 
+            {
+                descrizione:
+                    'NAUTILUS',
+
+                url:
+                    'https://www.nautilussportingcenter.it/'
+            },
+
+            {
+                descrizione:
+                    'FEDERNUOTO',
+
+                url:
+                    'https://www.federnuoto.it/home/master/norme-e-documenti-master/master-2026-2027-1.html'
+            },
+
+            {
+                descrizione:
+                    'CRLFIN',
+
+                url:
+                    'https://https://www.finlazio.it/.federnuoto.it'
+            },
+
+            {
+                descrizione:
+                    'NUOTO MASTER',
+
+                url:
+                    'https://www.nuotomaster.it/NUOTO/master.asp'
+            }
+
+        ];
         const cmbStagione =
             document.getElementById('cmbStagione');             /* combo stagione */
 
@@ -318,6 +356,7 @@
             stagioniDisponibili[0];          // stagione più recente
 
         generaMenu();                        // crea il menu
+        generaLinkUtili();                   // crea menu link utili
 
         caricaPubblicazione(
             'RISULTATI GARE'
@@ -375,6 +414,43 @@
 
             });
 
+
+        }
+        function generaLinkUtili() {
+
+            const menu =
+                document.getElementById(
+                    'menuLinkUtili'
+                );                              // contenitore
+
+            menu.innerHTML = '';               // pulizia
+
+            linkUtili.forEach(
+                link => {
+
+                    const voce =
+                        document.createElement(
+                            'div'
+                        );
+
+                    voce.className =
+                        'menu-item';           // stesso stile menu
+
+                    voce.textContent =
+                        link.descrizione;      // testo visualizzato
+
+                    voce.onclick =
+                        () =>
+                            window.open(
+                                link.url,
+                                '_blank'
+                            );                 // nuova scheda
+
+                    menu.appendChild(
+                        voce
+                    );                         // aggiunge la voce
+                }
+            );
         }
     </script> <!-- FINE SCRIPT -->
 
