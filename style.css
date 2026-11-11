@@ -43,21 +43,21 @@ body {
     display: grid;                      /* layout a griglia */
 
     grid-template-columns:
-        80px                           /* colonna logo */
+        80px                           /* colonna foto */
         5fr                             /* colonna titolo */
-        120px;                          /* colonna foto */
+        120px;                          /* colonna logo */
 
     align-items: center;                /* centra verticalmente */
 
     gap: 20px;                          /* spazio tra colonne */
 
-    padding: 15px;                      /* bordo interno */
+    padding: 10px;                      /* bordo interno */
 
-    border-radius: 15px;               /* angoli arrotondati */
+    border-radius: 10px;               /* angoli arrotondati */
 
     color: white;                       /* testo bianco */
 
-    margin-bottom: 15px;               /* spazio sotto */
+    margin-bottom: 10px;               /* spazio sotto */
 
 }
 
@@ -100,11 +100,17 @@ body {
     margin-bottom: 5px;                 /* spazio sotto */
 
 }
+.site-title h2 {
 
+    font-size: 16px;                    /* titolo principale */
+
+    margin-bottom: 5px;                 /* spazio sotto */
+
+}
 
 .site-title p {
 
-    font-size: 16px;                    /* sottotitolo */
+    font-size: 10px;                    /* sottotitolo */
 
 }
 
