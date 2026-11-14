@@ -1,0 +1,616 @@
+
+            <!DOCTYPE html>
+
+            <html lang="it">
+
+            <head>
+
+                <meta charset="UTF-8"> <!-- codifica UTF8 -->
+
+                <title>IRON_2026</title> <!-- titolo della scheda browser -->
+
+            </head>
+            <script>
+
+                function applicaFiltri() {
+                    const atleta =                                                    // legge il testo atleta
+                        document.getElementById('txtAtleta')
+                            .value
+                            .trim()
+                            .toUpperCase();
+
+
+                    const righe =                                                     // recupera tutte le righe
+                        document.querySelectorAll('#corpoTabella tr');
+
+                    righe.forEach(
+                        function (riga) {
+
+                            const testoAtleta =
+                                riga.dataset.atleta              // legge data-atleta
+                                    .trim()
+                                    .toUpperCase();
+
+
+                            let visibile = true;                                      // inizialmente visibile
+
+                            if (
+                                atleta !== '' &&                                      // filtro atleta valorizzato
+                                !testoAtleta.includes(atleta)                         // atleta non trovato
+                            ) {
+                                visibile = false;                                     // nasconde la riga
+                            }
+
+                            riga.style.display =                                      // mostra o nasconde
+                                visibile
+                                    ? 'table-row'                                     // visualizza la riga
+                                    : 'none';                                         // nasconde la riga
+
+                        }
+                    );
+
+
+                }
+
+                function ordinaTabella(campo) {                                        // ordina la tabella
+
+                    const corpoTabella =
+                        document.getElementById('corpoTabella');                       // tbody iron
+
+                    const righe =
+                        Array.from(
+                            corpoTabella.querySelectorAll('tr')
+                        );                                                             // tutte le righe
+
+                    righe.sort(
+                        function (a, b) {
+
+                            // ==========================================================
+                            // ATLETA
+                            // ==========================================================
+
+                            if (campo === 'atleta') {
+
+                                return a.dataset.atleta
+                                    .localeCompare(
+                                        b.dataset.atleta
+                                    );
+
+                            }
+
+                                       }
+            </script>
+
+            <body>
+
+                <!-- =============================================================== -->
+                <!-- TITOLO PAGINA                                                   -->
+                <!-- =============================================================== -->
+
+                <!-- =============================================================== -->
+                <!-- FILTRI GESTITI DALLA PAGINA PRINCIPALE DEL SITO                 -->
+                <!-- =============================================================== -->
+
+                <!-- =============================================================== -->
+                <!-- TABELLA CLASSIFICA                                               -->
+                <!-- =============================================================== -->
+
+                <table id="tabellaIron" border="1"> <!-- tabella iron -->
+
+                    <thead>
+
+                        <tr>    
+                            <th>Att.</th>
+                            <th>Pre.</th>
+                            <th>Atleta</th>
+                            <th>Punteggio</th>
+                            <th>nr.Gare</th>                           
+                            <th>nr.Staffette </th>
+                            <th>nr.OpenW</th>                            
+                            <th>nr.Regionali</th>
+                            <th>nr.1°posto</th>
+                            <th>nr.2°posto</th>                                                        
+                            <th>nr.3°posto</th>
+                            <th>nr.Italiani</th>
+                            <th>nr.1°posto</th>
+                            <th>nr.2°posto</th>                                                        
+                            <th>nr.3°posto</th>                            
+                            <th>nr.Reg/Ita</th>                            
+                                                                            
+                         </tr>
+
+                    </thead>
+
+                    <tbody id="corpoTabella">
+
+                        
+                <td>1</td>
+                <td>0</td>
+                <td>ABAGNALE MICHELE</td>
+                <td>40</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>1</td>
+                <td>0</td>
+                <td>AGRESTA CHIARA</td>
+                <td>40</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>1</td>
+                <td>0</td>
+                <td>BIANCHI SAMANTHA</td>
+                <td>40</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>1</td>
+                <td>0</td>
+                <td>D'URSI EUGENIO</td>
+                <td>40</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>1</td>
+                <td>0</td>
+                <td>MASSARO SERENELLA</td>
+                <td>40</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>1</td>
+                <td>0</td>
+                <td>MOSETTI MAURO</td>
+                <td>40</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>1</td>
+                <td>0</td>
+                <td>RIDOLFI MAURIZIO</td>
+                <td>40</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>1</td>
+                <td>0</td>
+                <td>URZI' EMANUELE ORAZIO FERDINANDO</td>
+                <td>40</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>1</td>
+                <td>0</td>
+                <td>VITALI LUCA</td>
+                <td>40</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>10</td>
+                <td>0</td>
+                <td>ANDINI FEDERICA</td>
+                <td>20</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>10</td>
+                <td>0</td>
+                <td>CALO' MANUEL</td>
+                <td>20</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>10</td>
+                <td>0</td>
+                <td>CALVINO GIANLUCA</td>
+                <td>20</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>10</td>
+                <td>0</td>
+                <td>CERONE MARZIA</td>
+                <td>20</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>10</td>
+                <td>0</td>
+                <td>CIPRI FABIOLA</td>
+                <td>20</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>10</td>
+                <td>0</td>
+                <td>DITTO MARIA ROSARIA</td>
+                <td>20</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>10</td>
+                <td>0</td>
+                <td>FABI FRANCESCA</td>
+                <td>20</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>10</td>
+                <td>0</td>
+                <td>GUARRACINO MAURIZIO</td>
+                <td>20</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>10</td>
+                <td>0</td>
+                <td>MEDICI AURORA</td>
+                <td>20</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>10</td>
+                <td>0</td>
+                <td>POMPILI CRISTIANO</td>
+                <td>20</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>10</td>
+                <td>0</td>
+                <td>ROSSETTO DANIELE</td>
+                <td>20</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>10</td>
+                <td>0</td>
+                <td>SANTICCHIA JHON JAIRO</td>
+                <td>20</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>10</td>
+                <td>0</td>
+                <td>SILVESTRELLI SERGIO</td>
+                <td>20</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>10</td>
+                <td>0</td>
+                <td>TORRONI GIOVANNI</td>
+                <td>20</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+                <td>10</td>
+                <td>0</td>
+                <td>URSINI FABIO</td>
+                <td>20</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+
+            </tr>
+
+            
+
+                    </tbody>
+
+                </table>
+
+            </body>
+
+            </html>
+
+            
