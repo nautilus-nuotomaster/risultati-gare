@@ -295,20 +295,7 @@
                 .textContent =
                 pubblicazione.titolo;
 
-            document
-                .getElementById(
-                    'titoloStagione'
-                )
-                .textContent =
-                'STAGIONE ' +
-                stagione +
-                '/' +
-                (
-                    parseInt(
-                        stagione
-                    ) + 1
-                );
-
+           
             document
                 .getElementById(
                     'contenutoStampa'
@@ -410,10 +397,12 @@
             righe.forEach(riga => {
 
                 const atletaRiga =
-                    riga.dataset.atleta.toUpperCase();                 // atleta riga
+    (riga.dataset.atleta || '')
+        .toUpperCase();          // evita errore se data-atleta non esiste
 
-                const manifestazioneRiga =
-                    riga.dataset.manifestazione.toUpperCase();         // manifestazione riga
+              const manifestazioneRiga =
+    (riga.dataset.manifestazione || '')
+        .toUpperCase();          // evita errore se data-manifestazione non esiste
 
                 let visibile = true;                                   // inizialmente visibile
 
